@@ -36,6 +36,10 @@ emphasizes bars (label(s) or index(es)), muting the rest. Direct value labels.
   "bars": [ { "label": "2021", "value": 4 }, { "label": "2026", "value": 48 } ] }
 ```
 
+`ref_line` overlays a dashed **benchmark line** (average/target/median) across the
+value axis with an end label, e.g. `{ "value": 38, "label": "Company average" }`
+— the a16z "vs. the average" overlay; works on both orientations.
+
 `note` adds a one-line **italic editorial callout** — the strongest "a human
 made this" cue. Pass a string and it auto-places in the emptiest corner
 (descending ranking → bottom, ascending → top; horizontal → right, vertical →

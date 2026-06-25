@@ -307,6 +307,8 @@ def _render_horizontal(spec, theme, bars, labels, values):
                   x0=rule_x[0], x1=rule_x[1], y0=1.0, y1=1.0,
                   line=dict(color=hex_to_rgba(title_c, 0.28), width=1))
 
+    _ref_line(fig, spec, theme, horizontal=True)
+
     # Auto-place the note in the emptiest corner: descending → bottom, else top.
     descending = values[0] >= values[-1]
     _editorial_note(fig, spec, theme, dict(
@@ -323,6 +325,34 @@ def _render_horizontal(spec, theme, bars, labels, values):
     else:
         apply_titles(fig, spec, theme, x_shift=x_shift)
     return fig
+
+
+def _ref_line(fig, spec, theme, horizontal):
+    """Optional benchmark line (a16z's "vs. the average/target" overlay): a dashed
+    rule across the value axis at `ref_line.value`, with a small end label."""
+    ref = spec.get("ref_line")
+    if not ref or ref.get("value") is None:
+        return
+    val = ref["value"]
+    color = hex_to_rgba(theme["title_color"], 0.55)
+    lab = ref.get("label", "")
+    fam = theme["font_family"]
+    sub = theme.get("subtitle_color", theme["font_color"])
+    if horizontal:  # value axis is x → vertical rule
+        fig.add_vline(x=val, line=dict(color=color, width=1.4, dash="dash"))
+        if lab:
+            fig.add_annotation(x=val, xref="x", y=1.0, yref="paper",
+                               yanchor="bottom", yshift=3, text=lab,
+                               showarrow=False, xanchor="center",
+                               font=dict(family=fam, size=theme["label_size"] - 1,
+                                         color=sub))
+    else:  # value axis is y → horizontal rule
+        fig.add_hline(y=val, line=dict(color=color, width=1.4, dash="dash"))
+        if lab:
+            fig.add_annotation(x=1.0, xref="paper", xanchor="right", y=val,
+                               yref="y", yshift=8, text=lab, showarrow=False,
+                               font=dict(family=fam, size=theme["label_size"] - 1,
+                                         color=sub))
 
 
 def _editorial_note(fig, spec, theme, default):
@@ -426,6 +456,7 @@ def render(spec: dict, theme: dict) -> go.Figure:
         bargap=0.35,
         showlegend=False,
     )
+    _ref_line(fig, spec, theme, horizontal=False)
     descending = values[0] >= values[-1]
     _editorial_note(fig, spec, theme, dict(
         y=0.96, yanchor="top",

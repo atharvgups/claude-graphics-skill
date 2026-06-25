@@ -1,0 +1,21 @@
+{
+  "chart_type": "bar",
+  "orientation": "v",
+  "title": "Most Teams Are Below the AI-Adoption Average",
+  "subtitle": "Share of workflows using AI daily, by department (%)",
+  "source": "Source: Fabricated sample data · claude-graphics-skill",
+  "theme": "editorial",
+  "value_suffix": "%",
+  "highlight": ["Engineering"],
+  "ref_line": { "value": 38, "label": "Company average · 38%" },
+  "height": 620,
+  "width": 1040,
+  "bars": [
+    { "label": "Engineering", "value": 71 },
+    { "label": "Marketing", "value": 52 },
+    { "label": "Support", "value": 44 },
+    { "label": "Sales", "value": 33 },
+    { "label": "Finance", "value": 21 },
+    { "label": "Legal", "value": 12 }
+  ]
+}
