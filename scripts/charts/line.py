@@ -182,6 +182,19 @@ def render(spec: dict, theme: dict) -> go.Figure:
             font=dict(family=theme["font_family"], size=theme["label_size"] - 1,
                       color=theme.get("subtitle_color", theme["font_color"])))
 
+    # Horizontal benchmark line (target / threshold) with a right-edge label.
+    ref = spec.get("ref_line")
+    if ref and ref.get("value") is not None:
+        fig.add_hline(y=ref["value"], line=dict(
+            color=hex_to_rgba(theme["title_color"], 0.55), width=1.4, dash="dash"))
+        if ref.get("label"):
+            fig.add_annotation(
+                x=1.0, xref="paper", xanchor="right", y=ref["value"], yref="y",
+                yshift=8, text=ref["label"], showarrow=False,
+                font=dict(family=theme["font_family"],
+                          size=theme["label_size"] - 1,
+                          color=theme.get("subtitle_color", theme["font_color"])))
+
     has_footer = bool(spec.get("footer") or spec.get("wordmark"))
     if has_footer:
         bottom = max(bottom, 226)

@@ -116,6 +116,7 @@ line's final value at its right end in the series color (a16z signature);
 `events: [{x, label}]` overlays dotted vertical markers with top labels for an
 **annotated time series** ("what happened, and when"). `bands: [{from, to,
 label}]` shades vertical period regions (recession/forecast shading).
+`ref_line: {value, label}` adds a horizontal threshold/target line.
 
 ```jsonc
 { "chart_type": "line", "end_values": true, "x": ["2022", "2023", "2024"],
