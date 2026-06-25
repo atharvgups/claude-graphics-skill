@@ -50,7 +50,9 @@ Scores are honest a16z-fidelity (1–5). "done" = the PNG truly looks studio-mad
 | population pyramid | done (5) | workforce_pyramid; mirrored bars, center divider, side headers |
 | connected/path scatter | done (5) | inflation_path_scatter; spline threads points in time order |
 | stream graph | done (5) | compute_stream; centered baseline, spline bands |
-| ridgeline | todo | stacked density ridges |
+| ridgeline | done (5) | latency_ridgeline; self-contained Gaussian KDE, overlapping ridges |
+
+**Phase 2 COMPLETE — all 11 a16z signature types added, each scores 5.**
 | beeswarm / strip | done (5) | deal_cycle_beeswarm; deterministic bin-packing, median ticks |
 | pictograph / isotype | done (5) | ai_adoption_pictograph; 10x10 waffle, largest-remainder counts |
 | annotated time series | done (5) | dau_annotated_line; events:[] dotted markers + top labels |

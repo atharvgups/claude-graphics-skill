@@ -353,6 +353,18 @@ tangle.
   "stages": [ { "label": "Impressions", "value": 1200000 }, { "label": "Engaged", "value": 384000 } ] }
 ```
 
+## ridgeline — overlapping density ridges (joyplot)
+
+One smoothed density (self-contained Gaussian KDE) per group, stacked with
+`overlap` so distributions compare at a glance — great for "the distribution
+shifted" over time/groups. `groups` each `{ name, values }`; `x_title` labels the
+value axis.
+
+```jsonc
+{ "chart_type": "ridgeline", "x_title": "Latency (ms)", "overlap": 1.6,
+  "groups": [ { "name": "2023", "values": [...] }, { "name": "2026", "values": [...] } ] }
+```
+
 ## stream — stream graph (centered stacked area)
 
 Stacked area flowed around a centered baseline (ThemeRiver), so the composition
