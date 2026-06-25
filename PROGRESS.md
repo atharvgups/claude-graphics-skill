@@ -45,7 +45,7 @@ Scores are honest a16z-fidelity (1–5). "done" = the PNG truly looks studio-mad
 |---|---|---|
 | diverging horizontal bar | done (5) | category_growth_diverging; teal-right/rust-left from central zero, callout |
 | marimekko / mosaic | todo | variable-width stacked bars |
-| 2×2 quadrant scatter | todo | labeled quadrants |
+| 2×2 quadrant scatter | done (5) | positioning_quadrant; dotted dividers + corner labels, gridless |
 | choropleth map | todo | US/world |
 | population pyramid | todo | diverging horizontal by cohort |
 | connected/path scatter | todo | time path through x/y |

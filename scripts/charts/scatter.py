@@ -56,6 +56,37 @@ def _trend(points):
     return (lo, slope * lo + b, hi, slope * hi + b)
 
 
+def _quadrants(fig, spec, theme):
+    """2×2 quadrant framing (a16z positioning charts): dotted divider lines at the
+    x/y midpoints (or given values) plus up to four muted corner labels."""
+    q = spec.get("quadrants")
+    if not q:
+        return
+    q = {} if q is True else q
+    pts = spec.get("points") or [p for s in spec.get("series", [])
+                                 for p in s.get("points", [])]
+    xs = [p["x"] for p in pts] or [0]
+    ys = [p["y"] for p in pts] or [0]
+    xmid = q.get("x", (min(xs) + max(xs)) / 2)
+    ymid = q.get("y", (min(ys) + max(ys)) / 2)
+    line = dict(color=hex_to_rgba(theme["title_color"], 0.28), width=1.2,
+                dash="dot")
+    fig.add_vline(x=xmid, line=line, layer="below")
+    fig.add_hline(y=ymid, line=line, layer="below")
+    labels = q.get("labels", {})
+    corners = {"tr": (0.985, 0.98, "right", "top"),
+               "tl": (0.015, 0.98, "left", "top"),
+               "bl": (0.015, 0.02, "left", "bottom"),
+               "br": (0.985, 0.02, "right", "bottom")}
+    for key, (px, py, xa, ya) in corners.items():
+        if labels.get(key):
+            fig.add_annotation(
+                text=f"<b>{labels[key]}</b>", xref="paper", yref="paper",
+                x=px, y=py, xanchor=xa, yanchor=ya, showarrow=False,
+                font=dict(family=theme["font_family"], size=theme["label_size"],
+                          color=theme.get("subtitle_color", theme["font_color"])))
+
+
 def render_points(fig, points, name, colors, theme, show_labels, label_colors=None):
     # Markers carry a paper-colored halo so overlapping bubbles stay crisp.
     fig.add_trace(go.Scatter(
@@ -115,7 +146,10 @@ def render(spec: dict, theme: dict) -> go.Figure:
     else:
         raise ValueError("Scatter spec needs 'points' or 'series'")
 
-    cartesian_axes(fig, theme, spec, x_grid=True, y_grid=True)
+    # Quadrant dividers replace gridlines (cleaner) when in 2×2 mode.
+    _quadrants(fig, spec, theme)
+    grid = not spec.get("quadrants")
+    cartesian_axes(fig, theme, spec, x_grid=grid, y_grid=grid)
     axis_font = dict(family=theme["font_family"], size=theme["label_size"] + 1,
                      color=theme.get("subtitle_color", theme["font_color"]))
     fig.update_xaxes(title=dict(text=spec.get("x_title", ""), font=axis_font))

@@ -140,6 +140,17 @@ label[s]) accents the story point(s) and mutes the rest.
   "points": [ { "x": 55, "y": 117, "label": "Business", "size": 260 } ] }
 ```
 
+**2×2 quadrant** (a16z positioning framework): add `quadrants` to draw dotted
+midpoint dividers (auto, or set `x`/`y`) and up to four muted corner `labels`
+(`tr`/`tl`/`bl`/`br`). Gridlines drop out so the two dividers carry the framing.
+
+```jsonc
+{ "chart_type": "scatter", "show_labels": true,
+  "quadrants": { "x": 55, "y": 100,
+    "labels": { "tr": "DURABLE LEADERS", "bl": "STALLING" } },
+  "points": [ { "x": 78, "y": 180, "label": "Simula", "size": 420 } ] }
+```
+
 ## pie — pie or donut
 
 `slices`; `"donut": true` for a ring. Use sparingly (bars/treemap usually win).
