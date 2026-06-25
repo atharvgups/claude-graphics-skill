@@ -289,10 +289,11 @@ def _render_horizontal(spec, theme, bars, labels, values):
     left = min(340, max(110, maxlen * 9 + 34))
     width = spec.get("width", 1040)
     right = 58
+    has_footer = bool(spec.get("footer") or spec.get("wordmark"))
     fig.update_layout(
         height=spec.get("height", 600), width=width,
         bargap=0.42, showlegend=False,
-        margin=dict(t=138, l=left, r=right, b=72),
+        margin=dict(t=138, l=left, r=right, b=174 if has_footer else 72),
     )
 
     # Full-bleed header rule under the title block — spans the entire graphic
@@ -300,21 +301,27 @@ def _render_horizontal(spec, theme, bars, labels, values):
     # editorial "laid out on a page" cue that a plot-area-only rule misses.
     plot_w = max(width - left - right, 1)
     pad = 28  # canvas inset matching the title block
+    x_shift = -(left - pad)
+    rule_x = ((pad - left) / plot_w, 1 + (right - pad) / plot_w)
     fig.add_shape(type="line", xref="paper", yref="paper",
-                  x0=(pad - left) / plot_w, x1=1 + (right - pad) / plot_w,
-                  y0=1.0, y1=1.0,
+                  x0=rule_x[0], x1=rule_x[1], y0=1.0, y1=1.0,
                   line=dict(color=hex_to_rgba(title_c, 0.28), width=1))
 
-    # Auto-place in the emptiest corner: descending ranking → space at the
-    # bottom; ascending → at the top.
+    # Auto-place the note in the emptiest corner: descending → bottom, else top.
     descending = values[0] >= values[-1]
-    note_default = dict(
+    _editorial_note(fig, spec, theme, dict(
         x=0.995, xanchor="right", align="right",
         y=0.12 if descending else 0.96,
-        yanchor="bottom" if descending else "top",
-    )
-    _editorial_note(fig, spec, theme, note_default)
-    apply_titles(fig, spec, theme, x_shift=-(left - 28))
+        yanchor="bottom" if descending else "top"))
+
+    if has_footer:
+        # Footer strip aligned to the canvas edges (the wide left label column
+        # means plot-paper x=0 is indented; shift text/rule back like the title).
+        apply_titles(fig, {**spec, "source": ""}, theme, x_shift=x_shift)
+        apply_footer(fig, spec, theme, source_y=-0.17, rule_y=-0.25,
+                     x_shift=x_shift, rule_x=rule_x, wordmark_xshift=(right - pad))
+    else:
+        apply_titles(fig, spec, theme, x_shift=x_shift)
     return fig
 
 

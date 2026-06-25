@@ -79,8 +79,8 @@ diverging from the zero line. No extra flag — just `"stacked": true` with mixe
 signs. Tuning fields: `y_dtick` (force gridline spacing, e.g. `10` for 10% steps)
 and `bargap` (bar width; lower = wider, ~`0.22` for a dense year-by-year stack).
 
-The **editorial footer strip** (the a16z bottom band) is opt-in on any
-multi-series **bar**, stacked-area **line**, or **combo**: `footer` draws a
+The **editorial footer strip** (the a16z bottom band) is opt-in on any **bar**
+(single or multi-series), **line**, or **combo**: `footer` draws a
 brand/CTA line bottom-left (e.g. `"More charts: simula.ad"`) and `wordmark` a
 brand mark bottom-right (e.g. `"SIMULA"`), separated from the chart by a
 full-width rule and a faint diagonal **crosshatch** paper-weave (disable with

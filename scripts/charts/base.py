@@ -213,7 +213,8 @@ def add_circle_legend(fig, names, colors, theme, *, traceorder="normal"):
                   color=theme["font_color"])))
 
 
-def _footer_texture(fig, theme, rule_y, *, run=0.045, spacing=0.013, band=0.13):
+def _footer_texture(fig, theme, rule_y, x0=0.0, x1=1.0, *, run=0.045,
+                    spacing=0.013, band=0.13):
     """
     Faint diagonal **crosshatch** behind the footer band — the subtle paper-weave
     on a16z charts. Drawn as ONE multi-segment `path` shape (cheap: a single
@@ -224,17 +225,17 @@ def _footer_texture(fig, theme, rule_y, *, run=0.045, spacing=0.013, band=0.13):
     bot = rule_y - band           # down toward the canvas edge
 
     def _clip(xb, y_a, y_b):
-        # Segment (xb, y_a) -> (xb+run, y_b); keep only the part with x in [0,1].
-        lo = max(0.0, (0.0 - xb) / run)
-        hi = min(1.0, (1.0 - xb) / run)
+        # Segment (xb, y_a) -> (xb+run, y_b); keep only the part with x in [x0,x1].
+        lo = max(0.0, (x0 - xb) / run)
+        hi = min(1.0, (x1 - xb) / run)
         if lo >= hi:
             return None
         return (xb + run * lo, y_a + (y_b - y_a) * lo,
                 xb + run * hi, y_a + (y_b - y_a) * hi)
 
     segs = []
-    xb = -run
-    while xb <= 1.0:
+    xb = x0 - run
+    while xb <= x1:
         for s in (_clip(xb, bot, top), _clip(xb, top, bot)):  # "/" and "\"
             if s:
                 segs.append("M {:.4f} {:.4f} L {:.4f} {:.4f}".format(*s))
@@ -247,7 +248,8 @@ def _footer_texture(fig, theme, rule_y, *, run=0.045, spacing=0.013, band=0.13):
         )
 
 
-def apply_footer(fig, spec, theme, source_y=-0.30, rule_y=-0.38):
+def apply_footer(fig, spec, theme, source_y=-0.30, rule_y=-0.38, x_shift=0,
+                 rule_x=(0.0, 1.0), wordmark_xshift=0):
     """
     The editorial footer strip — the bottom band on a16z / Jason Saltzman charts:
     a small source line, a full-width hairline rule, a brand/CTA line bottom-left,
@@ -258,8 +260,11 @@ def apply_footer(fig, spec, theme, source_y=-0.30, rule_y=-0.38):
       * `footer`  — a brand/CTA line, e.g. "More charts: simula.ad" (bottom-left).
       * `wordmark`— a small brand mark, e.g. "SIMULA" (bottom-right).
 
-    Positions are paper-referenced with negative y (below the plot); the calling
-    renderer must reserve a deep bottom margin (~230px) so nothing clips.
+    `x_shift` nudges the left-aligned text to the canvas edge (charts with a wide
+    left margin pass a negative shift, like apply_titles); `rule_x` is the paper
+    x-range of the full-bleed rule + texture; `wordmark_xshift` right-aligns the
+    wordmark to the canvas edge. Positions are paper-referenced with negative y;
+    the caller must reserve enough bottom margin.
     """
     title_c = theme["title_color"]
     fam = theme["font_family"]
@@ -269,7 +274,7 @@ def apply_footer(fig, spec, theme, source_y=-0.30, rule_y=-0.38):
 
     if src:
         fig.add_annotation(
-            text=src, xref="paper", yref="paper",
+            text=src, xref="paper", yref="paper", xshift=x_shift,
             x=0, xanchor="left", y=source_y, yanchor="top", showarrow=False,
             font=dict(family=fam, size=12.5, color=theme["source_color"]),
         )
@@ -278,23 +283,24 @@ def apply_footer(fig, spec, theme, source_y=-0.30, rule_y=-0.38):
         return
 
     if spec.get("footer_texture", True):
-        _footer_texture(fig, theme, rule_y)
+        _footer_texture(fig, theme, rule_y, rule_x[0], rule_x[1])
 
     fig.add_shape(
         type="line", xref="paper", yref="paper",
-        x0=0, x1=1, y0=rule_y, y1=rule_y,
+        x0=rule_x[0], x1=rule_x[1], y0=rule_y, y1=rule_y,
         line=dict(color=hex_to_rgba(title_c, 0.22), width=1),
     )
     if footer:
         fig.add_annotation(
             text=f"<b><i>{footer}</i></b>", xref="paper", yref="paper",
-            x=0, xanchor="left", y=rule_y - 0.025, yanchor="top", showarrow=False,
+            x=0, xanchor="left", xshift=x_shift, y=rule_y - 0.025,
+            yanchor="top", showarrow=False,
             font=dict(family=fam, size=15.5, color=theme["subtitle_color"]),
         )
     if wordmark:
         fig.add_annotation(
             text=f"<b>{wordmark}</b>", xref="paper", yref="paper",
-            x=1, xanchor="right", y=rule_y - 0.02, yanchor="top", showarrow=False,
-            font=dict(family=fam, size=19,
-                      color=hex_to_rgba(title_c, 0.85)),
+            x=1, xanchor="right", xshift=wordmark_xshift, y=rule_y - 0.02,
+            yanchor="top", showarrow=False,
+            font=dict(family=fam, size=19, color=hex_to_rgba(title_c, 0.85)),
         )

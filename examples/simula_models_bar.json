@@ -1,0 +1,24 @@
+{
+  "chart_type": "bar",
+  "orientation": "h",
+  "title": "The Models Developers Actually Ship",
+  "subtitle": "Share of production API calls by model family, Q2 2026",
+  "source": "Source: Fabricated sample data",
+  "footer": "More charts: simula.ad",
+  "wordmark": "SIMULA",
+  "theme": "simula",
+  "value_format": ",.0f",
+  "value_suffix": "%",
+  "highlight": ["Claude"],
+  "note": "Claude leads production traffic —<br>ahead of every other family.",
+  "height": 660,
+  "width": 1040,
+  "bars": [
+    { "label": "Claude", "value": 34 },
+    { "label": "GPT", "value": 29 },
+    { "label": "Gemini", "value": 16 },
+    { "label": "Llama", "value": 11 },
+    { "label": "Mistral", "value": 6 },
+    { "label": "Other", "value": 4 }
+  ]
+}
