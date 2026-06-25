@@ -1,0 +1,18 @@
+{
+  "chart_type": "line",
+  "fill": true,
+  "markers": true,
+  "point_labels": true,
+  "title": "Cocktails-in-a-Can Are Nearly 1/3rd of Spirits Sold",
+  "subtitle": "Ready-to-Drink (RTD) market share of spirits",
+  "source": "Source: Fabricated sample data · claude-graphics-skill",
+  "theme": "editorial",
+  "value_format": ",.1f",
+  "value_suffix": "%",
+  "height": 600,
+  "width": 1040,
+  "x": ["2020", "2021", "2022", "2023", "2024", "2025", "2026"],
+  "series": [
+    { "name": "RTD share", "values": [8.8, 12.6, 16.5, 20.2, 23.4, 26.9, 31.2], "color": "#3A6E86" }
+  ]
+}

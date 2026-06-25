@@ -15,7 +15,7 @@ Scores are honest a16z-fidelity (1–5). "done" = the PNG truly looks studio-mad
 | bar — grouped/100% | venture_stacked_bar, channel_mix_percent_bar | todo | 4 | circle legend ok; verify vs a16z |
 | line — multi | valuation_line | done | 5 | line_palette + dash cycle + circle legend + end-value labels |
 | line — single | machinery_line | done | 5 | no legend, halo markers, end-value label (fixed cat-axis collapse bug) |
-| area | (none yet) | todo | 3 | flat fill; need gradient + point markers + labels |
+| area | rtd_share_area | done | 5 | gradient fill + halo markers + per-point value labels; cat-axis hardened |
 | combo | inference_combo | todo | 3 | only 1 line; no markers; need 2-line + shapes |
 | scatter/bubble | spend_retention_scatter | todo | 3 | verify quadrant/label style |
 | pie/donut | revenue_mix_pie | todo | 3 | a16z rarely uses; verify or de-emphasize |

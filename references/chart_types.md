@@ -89,7 +89,9 @@ the full diverging-stacked + footer reference.
 `x` + `series`. Lines get **maximally-separated colors** (`line_palette`) plus an
 auto **dash-style cycle** (solid → dot → dash-dot …) so series never blur — set a
 per-series `"dash"` or `"dash_styles": false` to override. `markers` → halo'd
-dots; `fill` → area tint; `stacked` → stacked area (dot legend). A **single
+dots; `fill` → area tint (a **vertical gradient** for a single series);
+`point_labels: true` prints the value above every point (a16z area style);
+`stacked` → stacked area (dot legend). A **single
 series draws no legend** (the title carries it). `end_values: true` prints each
 line's final value at its right end in the series color (a16z signature);
 `label_mode: "end"` instead labels the series NAME at the end (no legend).

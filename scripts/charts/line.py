@@ -61,6 +61,8 @@ def render(spec: dict, theme: dict) -> go.Figure:
     end_values = bool(spec.get("end_values", False))
     single = len(series) == 1
 
+    # String x → categorical axis (even spacing; safe annotation refs by index).
+    is_cat = any(isinstance(xi, str) for xi in x)
     line_pal = theme.get("line_palette") or theme["palette"]
     stack_pal = theme.get("stack_palette") or line_pal
     # Dash variation is on by default for multiple plain lines; off for areas
@@ -95,7 +97,15 @@ def render(spec: dict, theme: dict) -> go.Figure:
             trace["line"]["dash"] = "solid"
         elif fill:
             trace["fill"] = "tozeroy"
-            trace["fillcolor"] = hex_to_rgba(c, 0.16)
+            if single:
+                # a16z single-area look: a vertical gradient fading the fill from
+                # the line color down to transparent at the baseline.
+                trace["fillgradient"] = dict(
+                    type="vertical",
+                    colorscale=[[0, hex_to_rgba(c, 0.0)],
+                                [1, hex_to_rgba(c, 0.42)]])
+            else:
+                trace["fillcolor"] = hex_to_rgba(c, 0.16)
         fig.add_trace(go.Scatter(**trace))
 
     # End-of-line labels are pinned to the plot's right edge in PAPER x (with the
@@ -129,11 +139,28 @@ def render(spec: dict, theme: dict) -> go.Figure:
                        colors[i], size_bump=1)
         right = max(right, 104)
 
+    # Per-point VALUE labels (a16z chart 8): bold value above each marker.
+    # Reference points by category INDEX (x=j, xref="x") not the label string —
+    # a string x on an unset xref defaults to paper and flies off-canvas.
+    if spec.get("point_labels"):
+        for i, s in enumerate(series):
+            for j, yi in enumerate(s["values"]):
+                fig.add_annotation(
+                    x=(j if is_cat else x[j]), xref="x", yref="y", y=yi, yshift=15,
+                    text=format_value(yi, spec), showarrow=False,
+                    font=dict(family=theme["font_family"],
+                              size=theme["label_size"], color=colors[i]))
+
     has_footer = bool(spec.get("footer") or spec.get("wordmark"))
     if has_footer:
         bottom = max(bottom, 226)
 
     cartesian_axes(fig, theme, spec, x_grid=False, y_grid=True)
+    # Force a categorical x-axis when labels are strings: it keeps even spacing
+    # and — critically — lets annotations safely reference x values without
+    # coercing the axis to numeric (which silently collapses the data).
+    if is_cat:
+        fig.update_xaxes(type="category")
     fig.update_layout(
         margin=dict(t=120, l=62, r=right, b=bottom),
         height=spec.get("height", 620),
