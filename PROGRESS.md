@@ -52,7 +52,7 @@ Scores are honest a16z-fidelity (1–5). "done" = the PNG truly looks studio-mad
 | stream graph | todo | wiggle-stacked area |
 | ridgeline | todo | stacked density ridges |
 | beeswarm / strip | todo | distribution dots |
-| pictograph / isotype | todo | icon arrays |
+| pictograph / isotype | done (5) | ai_adoption_pictograph; 10x10 waffle, largest-remainder counts |
 | annotated time series | done (5) | dau_annotated_line; events:[] dotted markers + top labels |
 
 ## Shared-helper backlog (cascades to many types)

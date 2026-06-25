@@ -1,0 +1,16 @@
+{
+  "chart_type": "pictograph",
+  "title": "Half of Companies Now Run AI in Production",
+  "subtitle": "Where 100 enterprises stand on AI adoption, 2026",
+  "source": "Source: Fabricated sample data · claude-graphics-skill",
+  "theme": "editorial",
+  "value_suffix": "%",
+  "height": 680,
+  "width": 780,
+  "items": [
+    { "label": "In production", "value": 52 },
+    { "label": "Piloting", "value": 28 },
+    { "label": "Evaluating", "value": 14 },
+    { "label": "No plans", "value": 6 }
+  ]
+}

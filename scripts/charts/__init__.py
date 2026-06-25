@@ -30,6 +30,7 @@ from . import indicator        # noqa: F401  (registers "bignumber" + "gauge" + 
 from . import marimekko        # noqa: F401  (registers "marimekko")
 from . import pyramid          # noqa: F401  (registers "pyramid")
 from . import choropleth       # noqa: F401  (registers "choropleth")
+from . import pictograph       # noqa: F401  (registers "pictograph")
 
 # Future chart types plug in the same way, e.g.:
 # from . import network  # noqa: F401

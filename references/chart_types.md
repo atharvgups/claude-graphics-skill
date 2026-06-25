@@ -353,6 +353,17 @@ tangle.
   "stages": [ { "label": "Impressions", "value": 1200000 }, { "label": "Engaged", "value": 384000 } ] }
 ```
 
+## pictograph — waffle / isotype ("X out of 100")
+
+A grid of squares, each a unit of the whole, filled proportionally by category —
+a harder-hitting share story than a pie. `columns`/`rows` default 10×10; counts
+use largest-remainder rounding to sum exactly. Legend shows label + value.
+
+```jsonc
+{ "chart_type": "pictograph", "value_suffix": "%",
+  "items": [ { "label": "In production", "value": 52 }, { "label": "Piloting", "value": 28 } ] }
+```
+
 ## choropleth — shaded map (US states or world)
 
 Built-in geometries, no GeoJSON. `scope: "usa"` → two-letter state codes;
