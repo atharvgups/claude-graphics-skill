@@ -12,7 +12,7 @@ Scores are honest a16z-fidelity (1–5). "done" = the PNG truly looks studio-mad
 | bar — horizontal | tool_ranking_bar | done | 5 | reference standard (callout, full-bleed rule, num-hero) |
 | bar — vertical | ai_spend_bar | done | 5 | callout + rule + rounded caps |
 | bar — diverging stacked | manufacturing_construction | done | 5 | matches a16z reference chart 4 |
-| bar — grouped/100% | venture_stacked_bar, channel_mix_percent_bar | todo | 4 | circle legend ok; verify vs a16z |
+| bar — grouped/100% | venture_stacked_bar, channel_mix_percent_bar | done | 5 | verified: full stacks, dot legend, % axis |
 | line — multi | valuation_line | done | 5 | line_palette + dash cycle + circle legend + end-value labels |
 | line — single | machinery_line | done | 5 | no legend, halo markers, end-value label (fixed cat-axis collapse bug) |
 | area | rtd_share_area | done | 5 | gradient fill + halo markers + per-point value labels; cat-axis hardened |
@@ -20,7 +20,7 @@ Scores are honest a16z-fidelity (1–5). "done" = the PNG truly looks studio-mad
 | scatter/bubble | spend_retention_scatter | done | 5 | halo markers, navy labels, optional trendline + highlight |
 | pie/donut | revenue_mix_pie | done | 5 | verified: direct outside labels, no legend, clean |
 | waterfall | arr_waterfall | done | 5 | fixed negative fmt (-$9M); teal gains/rust losses/navy totals |
-| dot (lollipop/dumbbell) | adoption_dumbbell | todo | 4 | built decently; verify |
+| dot (lollipop/dumbbell) | adoption_dumbbell | done | 5 | verified: gray→teal connectors, end labels, legend |
 | heatmap | retention_heatmap | done | 5 | triangular cohort grid: null cells render blank |
 | treemap | spend_treemap | done | 5 | verified: value-sized cells, direct labels, palette |
 | sunburst | spend_sunburst | done | 5 | verified: nested hierarchy, labeled segments |
@@ -32,11 +32,13 @@ Scores are honest a16z-fidelity (1–5). "done" = the PNG truly looks studio-mad
 | bump | model_bump | done | 5 | verified: smooth rank ribbons, right-edge labels |
 | candlestick | price_candlestick | done | 5 | verified: teal/rust OHLC candles, wicks, $ axis |
 | table | startups_table | done | 5 | verified: navy header, zebra rows |
-| bignumber | kpi_bignumber | todo | 4 | verify |
+| bignumber | kpi_bignumber | done | 5 | verified: big navy numbers, green deltas |
 | gauge | nps_gauge | done | 5 | fixed: faint accent track so full arc reads |
 | bullet | quota_bullet | done | 5 | verified: teal bars, rust targets, big-number deltas |
-| sankey | budget/energy/user_funnel, simula | todo | 4 | heavily worked earlier; verify |
-| funnel | conversion_funnel, simula_funnel | todo | 4 | heavily worked earlier; verify |
+| sankey | budget/energy/user_funnel, simula | done | 5 | verified: crossing-free hub flow, labeled nodes |
+| funnel | conversion_funnel, simula_funnel | done | 5 | verified: proportional stages, %+value labels |
+
+**Phase 1 COMPLETE — every existing type scores 5.**
 
 ## Phase 2 — a16z signature types to ADD
 | type | status | note |
