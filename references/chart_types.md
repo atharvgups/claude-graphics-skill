@@ -104,13 +104,16 @@ line's final value at its right end in the series color (a16z signature);
 
 ## combo — dual-axis bar + line
 
-A `bar` and a `line` over shared `x`; each side can set `axis_title`, `prefix`,
-`suffix`. For "volume vs. rate" stories.
+A `bar` plus one or more lines over shared `x`. Use `line` for a single line or
+`lines: [...]` for several on the right axis — each gets a **distinct marker
+shape** (circle, diamond, square…). Each side sets `axis_title`/`prefix`/`suffix`
+(the right axis follows the first line). For "volume vs. rate" stories.
 
 ```jsonc
 { "chart_type": "combo", "x": ["Jan", "Feb"],
-  "bar":  { "name": "Tokens (B)", "axis_title": "Tokens (B)", "values": [5, 16] },
-  "line": { "name": "Price", "axis_title": "Price ($/1M)", "prefix": "$", "values": [1.6, 0.95] } }
+  "bar":   { "name": "Tokens (B)", "axis_title": "Tokens (B)", "values": [5, 16] },
+  "lines": [ { "name": "Price", "axis_title": "Price ($/1M)", "prefix": "$", "values": [1.6, 0.95] },
+             { "name": "Margin", "suffix": "%", "values": [42, 55] } ] }
 ```
 
 ## scatter — incl. bubble
