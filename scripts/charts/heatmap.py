@@ -41,13 +41,17 @@ def render(spec: dict, theme: dict) -> go.Figure:
     heat = dict(
         x=x, y=y, z=z,
         colorscale=scale, xgap=3, ygap=3,
+        # `null` cells (e.g. a cohort's future months) render as blank gaps — a
+        # proper triangular cohort grid, not misleading 0s.
+        hoverongaps=False,
         hovertemplate="%{y} · %{x}: %{z}<extra></extra>",
         colorbar=dict(outlinewidth=0, tickfont=dict(
             family=theme["font_family"], size=theme["label_size"],
             color=theme.get("subtitle_color", theme["font_color"]))),
     )
     if show_values:
-        heat["text"] = [[format_value(v, spec) for v in row] for row in z]
+        heat["text"] = [["" if v is None else format_value(v, spec)
+                         for v in row] for row in z]
         heat["texttemplate"] = "%{text}"
         heat["textfont"] = dict(family=theme["font_family"],
                                 size=theme["label_size"])
