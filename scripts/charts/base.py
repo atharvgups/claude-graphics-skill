@@ -86,6 +86,37 @@ def apply_titles(fig, spec: dict, theme: dict, x_shift: float = 0) -> None:
     subtitle = spec.get("subtitle", "")
     source = spec.get("source", "")
 
+    # Wrap width so a long headline breaks to a second line (the a16z norm)
+    # instead of overflowing the right edge. Derived from the canvas width minus
+    # margins and the title's left offset; top margins already leave room for two
+    # title lines at the standard yshift.
+    lw = fig.layout.width or 1000
+    m = fig.layout.margin
+    ml = m.l if (m and m.l is not None) else 80
+    mr = m.r if (m and m.r is not None) else 24
+    text_width = max(240, lw - mr - (ml + x_shift) - 10)
+
+    def _wrap(text, font_px, char_w=0.52):
+        # Hard-wrap to the canvas width with explicit <br> (annotation `width`
+        # alone doesn't reliably wrap in static export). Respect any <br> the
+        # caller already inserted.
+        if not text or "<br>" in text:
+            return text
+        max_chars = max(8, int(text_width / (font_px * char_w)))
+        words, lines, cur = text.split(), [], ""
+        for w in words:
+            if cur and len(cur) + 1 + len(w) > max_chars:
+                lines.append(cur)
+                cur = w
+            else:
+                cur = f"{cur} {w}".strip()
+        if cur:
+            lines.append(cur)
+        return "<br>".join(lines)
+
+    title = _wrap(title, theme["title_size"])
+    subtitle = _wrap(subtitle, theme["subtitle_size"], char_w=0.5)
+
     # Position everything as paper-referenced annotations with pixel offsets.
     # Plotly's layout.title doesn't support pixel nudging (yshift), and we want
     # all three text elements left-aligned to the same edge with predictable
@@ -100,6 +131,7 @@ def apply_titles(fig, spec: dict, theme: dict, x_shift: float = 0) -> None:
                 y=1.0, yref="paper", yanchor="bottom",
                 xshift=x_shift,
                 yshift=64 if subtitle else 40,
+                width=text_width, align="left",
                 showarrow=False,
                 font=dict(
                     family=theme["font_family"],
@@ -117,6 +149,7 @@ def apply_titles(fig, spec: dict, theme: dict, x_shift: float = 0) -> None:
                 y=1.0, yref="paper", yanchor="bottom",
                 xshift=x_shift,
                 yshift=36,
+                width=text_width, align="left",
                 showarrow=False,
                 font=dict(
                     family=theme["font_family"],
