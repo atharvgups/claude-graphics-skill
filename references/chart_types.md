@@ -114,7 +114,8 @@ series draws no legend** (the title carries it). `end_values: true` prints each
 line's final value at its right end in the series color (a16z signature);
 `label_mode: "end"` instead labels the series NAME at the end (no legend).
 `events: [{x, label}]` overlays dotted vertical markers with top labels for an
-**annotated time series** ("what happened, and when").
+**annotated time series** ("what happened, and when"). `bands: [{from, to,
+label}]` shades vertical period regions (recession/forecast shading).
 
 ```jsonc
 { "chart_type": "line", "end_values": true, "x": ["2022", "2023", "2024"],

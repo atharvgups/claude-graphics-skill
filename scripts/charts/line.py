@@ -151,6 +151,23 @@ def render(spec: dict, theme: dict) -> go.Figure:
                     font=dict(family=theme["font_family"],
                               size=theme["label_size"], color=colors[i]))
 
+    # Shaded period bands (recession/forecast shading): faint vertical regions
+    # spanning an x-range, drawn beneath the lines.
+    for band in spec.get("bands", []):
+        bf, bt = band.get("from"), band.get("to")
+        bx0 = x.index(bf) if (is_cat and bf in x) else bf
+        bx1 = x.index(bt) if (is_cat and bt in x) else bt
+        fig.add_vrect(x0=bx0, x1=bx1, layer="below", line_width=0,
+                      fillcolor=hex_to_rgba(theme["title_color"], 0.06))
+        if band.get("label"):
+            fig.add_annotation(
+                x=(bx0 + bx1) / 2, xref="x", y=1.0, yref="paper",
+                yanchor="bottom", yshift=3, text=band["label"], showarrow=False,
+                xanchor="center", font=dict(family=theme["font_family"],
+                                            size=theme["label_size"] - 1,
+                                            color=theme.get("subtitle_color",
+                                                            theme["font_color"])))
+
     # Event markers (annotated time series): dotted vertical rules with a small
     # top label at given x positions — "what happened, and when".
     for ev in spec.get("events", []):

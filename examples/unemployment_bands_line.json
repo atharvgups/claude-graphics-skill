@@ -1,0 +1,15 @@
+{
+  "chart_type": "line",
+  "value_suffix": "%",
+  "title": "Unemployment Through the Cycle",
+  "subtitle": "U.S. unemployment rate, with the recession shaded",
+  "source": "Source: Fabricated sample data · claude-graphics-skill",
+  "theme": "editorial",
+  "height": 600,
+  "width": 1060,
+  "x": ["2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026"],
+  "bands": [{ "from": "2020", "to": "2021", "label": "Recession" }],
+  "series": [
+    { "name": "Unemployment", "values": [3.9, 3.7, 8.1, 5.4, 3.6, 3.6, 4.0, 4.3, 4.4] }
+  ]
+}
