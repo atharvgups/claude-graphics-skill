@@ -79,6 +79,15 @@ Second pass (robustness + fidelity, all committed):
   round_sizes_grouped, eng_time_bar, context_window_lollipop, simula_models_bar
 50 examples total; gallery renders all 50 clean; package rebuilt (120K).
 
+## Headline alignment fix (Isaac feedback — "title slightly indented")
+Root cause: on cartesian charts the title/legend/footer anchored to the PLOT
+edge (l=40..110px) while the y-axis labels extended further left, so the headline
+looked indented. Added `edge_align()` (base.py) and applied across bar (multi),
+line, combo, scatter, heatmap, histogram, box, candlestick, bump, slope,
+small_multiples, pie (needed automargin=False), radar. All headlines now sit at
+the ~28px canvas edge (verified by pixel measurement, title_x≈30). Charts already
+at the edge: treemap, sunburst, table, sankey, funnel, dot, waterfall, indicators.
+
 ## Log
 - a59a7fa baseline import (all current work).
 - 3d23d83 a16z calibration notes + PROGRESS.
