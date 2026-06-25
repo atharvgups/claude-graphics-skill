@@ -1,0 +1,18 @@
+{
+  "chart_type": "choropleth",
+  "scope": "world",
+  "title": "Where Private AI Investment Flows",
+  "subtitle": "Cumulative private AI investment by country, 2020–2026 ($B)",
+  "source": "Source: Fabricated sample data · claude-graphics-skill",
+  "theme": "editorial",
+  "value_prefix": "$",
+  "value_suffix": "B",
+  "height": 640,
+  "width": 1100,
+  "locations": [
+    "United States", "China", "United Kingdom", "Israel", "Canada",
+    "Germany", "France", "India", "Japan", "South Korea", "Singapore",
+    "Sweden", "Australia", "Brazil", "United Arab Emirates"
+  ],
+  "z": [330, 120, 28, 22, 19, 16, 14, 13, 11, 9, 8, 6, 5, 4, 4]
+}
