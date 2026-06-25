@@ -43,7 +43,7 @@ Scores are honest a16z-fidelity (1–5). "done" = the PNG truly looks studio-mad
 ## Phase 2 — a16z signature types to ADD
 | type | status | note |
 |---|---|---|
-| diverging horizontal bar | todo | a16z chart 7 ("Spirited Away"); +%/−% from center, dual labels |
+| diverging horizontal bar | done (5) | category_growth_diverging; teal-right/rust-left from central zero, callout |
 | marimekko / mosaic | todo | variable-width stacked bars |
 | 2×2 quadrant scatter | todo | labeled quadrants |
 | choropleth map | todo | US/world |

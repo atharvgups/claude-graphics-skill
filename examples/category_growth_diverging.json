@@ -1,0 +1,26 @@
+{
+  "chart_type": "bar",
+  "orientation": "h",
+  "title": "Prepared Cocktails and Non-Alc Are the Only Growth",
+  "subtitle": "Spirits volume growth by category, year-over-year (%)",
+  "source": "Source: Fabricated sample data · claude-graphics-skill",
+  "theme": "editorial",
+  "value_format": ",.1f",
+  "value_suffix": "%",
+  "note": "Only two categories grew;<br>everything brown-spirit shrank.",
+  "height": 640,
+  "width": 1040,
+  "bars": [
+    { "label": "Non-Alc Spirits", "value": 72.5 },
+    { "label": "Prepared Cocktails", "value": 25.9 },
+    { "label": "Grain Alcohol", "value": -5.7 },
+    { "label": "Tequila", "value": -0.5 },
+    { "label": "Cordials", "value": -1.9 },
+    { "label": "Cognac", "value": -7.4 },
+    { "label": "Gin", "value": -7.7 },
+    { "label": "Brandy", "value": -8.5 },
+    { "label": "Rum", "value": -7.1 },
+    { "label": "Vodka", "value": -4.2 },
+    { "label": "Whiskey", "value": -5.5 }
+  ]
+}

@@ -49,6 +49,17 @@ default** when the data has a clear takeaway; set `"note": false` to suppress it
   "bars": [ { "label": "Foundation models", "value": 1.4 } ] }
 ```
 
+**Diverging horizontal ranking** (a16z "Spirited Away"): a horizontal `bar` whose
+`value`s include negatives renders diverging from a central zero line — positives
+run right (accent), negatives run left (rust) — auto-detected (or force with
+`"diverging": true`). Sort the bars by value for the cleanest read.
+
+```jsonc
+{ "chart_type": "bar", "orientation": "h", "value_suffix": "%",
+  "note": "Only two categories grew.",
+  "bars": [ { "label": "Non-Alc", "value": 72.5 }, { "label": "Whiskey", "value": -5.5 } ] }
+```
+
 Grouped/stacked via `x` + `series`; `"stacked": true` to stack, `"percent": true`
 for a 100%-stacked composition (auto % axis). Multi-series uses a circle-dot
 legend + value axis (no per-segment labels), the broader 9-tone `stack_palette`,

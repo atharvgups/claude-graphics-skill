@@ -162,11 +162,12 @@ def _split_value(value, spec):
     fmt = spec.get("value_format", ",.0f")
     prefix = spec.get("value_prefix", "")
     suffix = spec.get("value_suffix", "")
+    neg = isinstance(value, (int, float)) and value < 0 and prefix
     try:
-        body = format(value, fmt)
+        body = format(abs(value) if neg else value, fmt)
     except (ValueError, TypeError):
         body = str(value)
-    return f"{prefix}{body}", suffix.strip()
+    return f"{'-' if neg else ''}{prefix}{body}", suffix.strip()
 
 
 def _render_horizontal(spec, theme, bars, labels, values):
@@ -192,10 +193,14 @@ def _render_horizontal(spec, theme, bars, labels, values):
         dead corner and gives the chart a human voice.
     """
     accent = theme["palette"][0]
+    neg_c = theme["palette"][4 % len(theme["palette"])]  # rust, for negatives
     bar_muted = theme.get("bar_muted") or hex_to_rgba(theme["font_color"], 0.30)
     title_c = theme["title_color"]
     sub_c = theme.get("subtitle_color", theme["font_color"])
     highlight = _resolve_highlight(spec, labels)
+    # Diverging ranking: bars run right (positive, accent) / left (negative, rust)
+    # from a central zero line — a16z's "Spirited Away" layout.
+    diverging = bool(spec.get("diverging")) or any(v < 0 for v in values)
     n = len(labels)
 
     # Per-bar styling. When no highlight is set, every bar is "on" (full accent);
@@ -205,6 +210,8 @@ def _render_horizontal(spec, theme, bars, labels, values):
         on = (highlight is None) or (i in highlight)
         if b.get("color"):
             bar_colors.append(b["color"])
+        elif diverging and highlight is None:
+            bar_colors.append(accent if values[i] >= 0 else neg_c)
         elif highlight is None:
             bar_colors.append(accent)
         else:
@@ -233,8 +240,13 @@ def _render_horizontal(spec, theme, bars, labels, values):
     # Numeric y positions (top bar highest) — robust to duplicate labels and gives
     # exact control over spacing/order without categorical-axis surprises.
     ypos = [n - 1 - i for i in range(n)]
-    hi = max(values + [0])
-    axis_range = [0, hi * 1.16]  # headroom for the outside value labels
+    if diverging:
+        lo, hi = min(values + [0]), max(values + [0])
+        span = (hi - lo) or 1
+        axis_range = [lo - span * 0.16, hi + span * 0.16]
+    else:
+        hi = max(values + [0])
+        axis_range = [0, hi * 1.16]  # headroom for outside value labels
 
     # Hover text: a per-bar `hover` string wins (e.g. show an exact, unrounded
     # figure on hover while the bar label stays clean); else the formatted value.
@@ -262,10 +274,12 @@ def _render_horizontal(spec, theme, bars, labels, values):
     fig.update_xaxes(showgrid=False, zeroline=False, showline=False, ticks="",
                      showticklabels=False, range=axis_range)
 
-    # Hairline zero baseline — the bars' anchor (replaces the gridlines).
+    # Hairline zero baseline — the bars' anchor (replaces the gridlines); a touch
+    # stronger for diverging charts, where it's the central +/- divider.
     fig.add_shape(type="line", xref="x", yref="y",
                   x0=0, x1=0, y0=-0.6, y1=n - 0.4,
-                  line=dict(color=hex_to_rgba(title_c, 0.32), width=1.4),
+                  line=dict(color=hex_to_rgba(title_c, 0.5 if diverging else 0.32),
+                            width=1.6 if diverging else 1.4),
                   layer="below")
 
     maxlen = max((len(l) for l in labels), default=0)
