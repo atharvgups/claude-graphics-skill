@@ -146,8 +146,11 @@ def apply_titles(fig, spec: dict, theme: dict, x_shift: float = 0) -> None:
             dict(
                 text=subtitle,
                 x=0, xref="paper", xanchor="left",
+                # Optical nudge: the light-gray subtitle reads as recessed next to
+                # the heavy bold title even at the same x, so shift it a hair right
+                # to make the two lines look truly in-line.
                 y=1.0, yref="paper", yanchor="bottom",
-                xshift=x_shift,
+                xshift=x_shift + 3,
                 yshift=36,
                 width=text_width, align="left",
                 showarrow=False,
