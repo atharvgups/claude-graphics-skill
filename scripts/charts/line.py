@@ -151,6 +151,20 @@ def render(spec: dict, theme: dict) -> go.Figure:
                     font=dict(family=theme["font_family"],
                               size=theme["label_size"], color=colors[i]))
 
+    # Event markers (annotated time series): dotted vertical rules with a small
+    # top label at given x positions — "what happened, and when".
+    for ev in spec.get("events", []):
+        ex = ev.get("x")
+        xpos = x.index(ex) if (is_cat and ex in x) else ex
+        fig.add_vline(x=xpos, layer="below",
+                      line=dict(color=hex_to_rgba(theme["title_color"], 0.38),
+                                width=1.2, dash="dot"))
+        fig.add_annotation(
+            x=xpos, xref="x", y=1.0, yref="paper", yanchor="bottom", yshift=3,
+            text=ev.get("label", ""), showarrow=False, xanchor="center",
+            font=dict(family=theme["font_family"], size=theme["label_size"] - 1,
+                      color=theme.get("subtitle_color", theme["font_color"])))
+
     has_footer = bool(spec.get("footer") or spec.get("wordmark"))
     if has_footer:
         bottom = max(bottom, 226)

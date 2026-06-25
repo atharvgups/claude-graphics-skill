@@ -53,7 +53,7 @@ Scores are honest a16z-fidelity (1–5). "done" = the PNG truly looks studio-mad
 | ridgeline | todo | stacked density ridges |
 | beeswarm / strip | todo | distribution dots |
 | pictograph / isotype | todo | icon arrays |
-| annotated time series | todo | event markers on a line |
+| annotated time series | done (5) | dau_annotated_line; events:[] dotted markers + top labels |
 
 ## Shared-helper backlog (cascades to many types)
 - Line/area: marker support, dash-style cycle, gradient area fill, per-point value

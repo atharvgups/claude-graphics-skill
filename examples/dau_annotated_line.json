@@ -1,0 +1,20 @@
+{
+  "chart_type": "line",
+  "title": "Daily Active Users Through a Bumpy Year",
+  "subtitle": "DAU (millions), with the moments that moved the needle",
+  "source": "Source: Fabricated sample data · claude-graphics-skill",
+  "theme": "editorial",
+  "value_suffix": "M",
+  "markers": false,
+  "height": 600,
+  "width": 1060,
+  "x": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+  "events": [
+    { "x": "Mar", "label": "v2 launch" },
+    { "x": "Jul", "label": "Outage" },
+    { "x": "Oct", "label": "Price cut" }
+  ],
+  "series": [
+    { "name": "DAU", "values": [4.2, 4.5, 5.4, 6.1, 6.6, 7.0, 6.3, 6.8, 7.6, 9.1, 10.2, 11.4] }
+  ]
+}
