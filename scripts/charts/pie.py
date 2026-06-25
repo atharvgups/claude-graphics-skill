@@ -40,6 +40,10 @@ def render(spec: dict, theme: dict) -> go.Figure:
         marker=dict(colors=colors, line=dict(color=theme["paper_bg"], width=2)),
         hole=0.55 if spec.get("donut", False) else 0,
         sort=False, direction="clockwise",
+        # automargin off: keep the paper origin fixed so the headline stays at the
+        # canvas edge (outside labels otherwise auto-expand the margin and shove
+        # the title inward). Plotly shrinks the pie to fit the labels instead.
+        automargin=False,
         textposition="outside",
         texttemplate="<b>%{label}</b>  %{percent}",
         textfont=dict(family=theme["font_family"], size=theme["label_size"],
@@ -52,5 +56,5 @@ def render(spec: dict, theme: dict) -> go.Figure:
         height=spec.get("height", 640),
         width=spec.get("width", 900),
     )
-    apply_titles(fig, spec, theme)
+    apply_titles(fig, spec, theme, x_shift=-(40 - 28))  # headline to canvas edge
     return fig
