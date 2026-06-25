@@ -55,11 +55,14 @@ def format_value(value: float, spec: dict) -> str:
     fmt = spec.get("value_format", ",.0f")
     prefix = spec.get("value_prefix", "")
     suffix = spec.get("value_suffix", "")
+    # Negative values with a prefix read correctly as "-$9M", not "$-9M": pull the
+    # sign out in front of the prefix (no-op when there's no prefix).
+    neg = isinstance(value, (int, float)) and value < 0 and prefix
     try:
-        body = format(value, fmt)
+        body = format(abs(value) if neg else value, fmt)
     except (ValueError, TypeError):
         body = str(value)
-    return f"{prefix}{body}{suffix}"
+    return f"{'-' if neg else ''}{prefix}{body}{suffix}"
 
 
 def apply_titles(fig, spec: dict, theme: dict, x_shift: float = 0) -> None:

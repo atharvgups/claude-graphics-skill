@@ -18,10 +18,10 @@ Scores are honest a16z-fidelity (1–5). "done" = the PNG truly looks studio-mad
 | area | rtd_share_area | done | 5 | gradient fill + halo markers + per-point value labels; cat-axis hardened |
 | combo | inference_combo, industrial_imports_combo | done | 5 | multi-line on RHS + distinct marker shapes; rounded bars; dot legend |
 | scatter/bubble | spend_retention_scatter | done | 5 | halo markers, navy labels, optional trendline + highlight |
-| pie/donut | revenue_mix_pie | todo | 3 | a16z rarely uses; verify or de-emphasize |
-| waterfall | arr_waterfall | todo | 3 | verify connector/label style |
+| pie/donut | revenue_mix_pie | done | 5 | verified: direct outside labels, no legend, clean |
+| waterfall | arr_waterfall | done | 5 | fixed negative fmt (-$9M); teal gains/rust losses/navy totals |
 | dot (lollipop/dumbbell) | adoption_dumbbell | todo | 4 | built decently; verify |
-| heatmap | retention_heatmap | todo | 3 | verify |
+| heatmap | retention_heatmap | done | 5 | triangular cohort grid: null cells render blank |
 | treemap | spend_treemap | todo | 3 | verify |
 | sunburst | spend_sunburst | todo | 3 | verify |
 | small_multiples | regions_small_multiples | todo | 3 | verify |
