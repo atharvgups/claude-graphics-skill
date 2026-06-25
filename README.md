@@ -1,13 +1,15 @@
 # claude-graphics-skill
 
 A Claude Skill for generating **polished, presentation-ready data
-visualizations** from structured data. Sankey diagrams are the flagship use
-case; the engine is modular so flow charts, funnels, and network diagrams can be
-added without rewiring anything.
+visualizations** from structured data — **30 chart types**, each tuned to the
+a16z / Jason Saltzman editorial house style. The engine is a registry: every
+chart type is one module, so new types drop in without rewiring anything.
 
-The goal is the "viral LinkedIn data graphic" look — designed defaults
-(typography, curated palettes, title/subtitle/source furniture) so output looks
-finished without manual tweaking.
+The goal is the "a person assumes a studio spent hours on this" look — designed
+defaults (serif headlines on warm paper, curated earthy palettes, one-accent
+emphasis, number-as-hero labels, header rule + footer wordmark, editorial
+callouts) so output looks finished without manual tweaking. A dark `simula`
+theme applies the same discipline for scroll-stopping LinkedIn graphics.
 
 ## Quick start
 
@@ -64,9 +66,10 @@ A graphic is a small JSON **spec**. Full schema and rules are in
 
 | Field | What it is |
 |---|---|
-| `chart_type` | which renderer: `sankey`, `funnel`, or `bar` |
+| `chart_type` | which renderer — one of 30 (see the list above / `references/chart_types.md`) |
 | `title` / `subtitle` / `source` | headline, one-line takeaway, attribution |
-| `theme` | `midnight` \| `simula` \| `editorial` \| `brand` |
+| `theme` | `editorial` (default) \| `simula` \| `midnight` \| `brand` |
+| `footer` / `wordmark` | optional brand strip: CTA line + wordmark + rule + crosshatch |
 | `value_format` / `value_prefix` / `value_suffix` | number formatting |
 | `nodes` / `links` | Sankey data: `[{ "id", "label", "color?" }]` + `[{ "source", "target", "value", "color?" }]` |
 | `stages` | Funnel data: `[{ "label", "value", "color?" }]` top-to-bottom |
@@ -88,46 +91,54 @@ A graphic is a small JSON **spec**. Full schema and rules are in
 claude-graphics-skill/
 ├── SKILL.md                  # Skill definition (frontmatter + instructions)
 ├── README.md                 # This file
+├── PROGRESS.md               # per-type quality tracker (a16z-fidelity scores)
 ├── requirements.txt          # plotly (core) + kaleido (optional static export)
+├── references/
+│   ├── chart_types.md        # full field spec for every chart_type
+│   └── a16z_observations.md  # house-style calibration notes (real charts studied)
 ├── scripts/
 │   ├── render.py             # CLI: load spec → dispatch by chart_type → write file
+│   ├── build_gallery.py      # render every example → output/gallery.html contact sheet
 │   ├── theme.py              # palettes + themes + color helpers (the "designed" layer)
 │   └── charts/
 │       ├── __init__.py       # imports each chart module to register it
-│       ├── base.py           # registry + shared title/axis/legend/value helpers
-│       ├── bar.py            # bar: single, grouped, stacked (v/h)
-│       ├── line.py           # line + area, multi-series
-│       ├── combo.py          # dual-axis bar + line
-│       ├── scatter.py        # scatter + bubble
+│       ├── base.py           # registry + shared title/axis/legend/footer/value helpers
+│       ├── bar.py            # bar: single/grouped/stacked/100%/diverging (v/h), dual-label
+│       ├── line.py           # line + area (gradient, markers, dash, end-labels, events)
+│       ├── combo.py          # dual-axis bar + multi-line (marker shapes)
+│       ├── scatter.py        # scatter/bubble + trendline + 2×2 quadrant + connected path
 │       ├── pie.py            # pie + donut
 │       ├── waterfall.py      # bridges / walks
 │       ├── dot.py            # lollipop + dumbbell (before/after)
-│       ├── heatmap.py        # matrix / cohorts
+│       ├── heatmap.py        # matrix / cohorts (triangular)
 │       ├── treemap.py        # nested parts-of-whole
+│       ├── hierarchy.py      # sunburst (radial hierarchy)
 │       ├── small_multiples.py# grid of mini charts (shared scale)
+│       ├── histogram.py      # distribution of one variable
+│       ├── box.py            # box / violin by group
+│       ├── radar.py          # multi-dimension comparison
+│       ├── slope.py          # two-period slopegraph
+│       ├── bump.py           # rank-over-time
+│       ├── candlestick.py    # OHLC price action
+│       ├── table.py          # styled data table
+│       ├── indicator.py      # bignumber (KPI) + gauge + bullet
+│       ├── marimekko.py      # variable-width 100%-stacked columns (mosaic)
+│       ├── pyramid.py        # population pyramid (mirrored cohorts)
+│       ├── choropleth.py     # shaded map (US states / world)
+│       ├── pictograph.py     # waffle / isotype ("X out of 100")
+│       ├── beeswarm.py       # distribution dots by group
+│       ├── stream.py         # stream graph (centered ThemeRiver)
+│       ├── ridgeline.py      # overlapping density ridges (joyplot)
 │       ├── sankey.py         # Sankey (auto crossing-minimizing layout + highlight)
 │       └── funnel.py         # funnel
-├── examples/                 # fabricated specs, ready to render (mostly editorial/a16z)
-│   ├── ai_spend_bar.json         # Bar · vertical, single highlight
-│   ├── tool_ranking_bar.json     # Bar · horizontal ranking
-│   ├── venture_stacked_bar.json  # Bar · stacked multi-series
-│   ├── valuation_line.json       # Line · multi-series
-│   ├── inference_combo.json      # Combo · dual-axis bar + line
-│   ├── spend_retention_scatter.json # Scatter · bubble
-│   ├── revenue_mix_pie.json      # Pie · donut
-│   ├── arr_waterfall.json        # Waterfall · ARR bridge
-│   ├── adoption_dumbbell.json    # Dot · dumbbell (before/after)
-│   ├── retention_heatmap.json    # Heatmap · cohorts
-│   ├── spend_treemap.json        # Treemap · cloud spend
-│   ├── regions_small_multiples.json # Small multiples · line grid
-│   ├── budget_flow.json          # Sankey · editorial
-│   ├── energy_flow.json          # Sankey · editorial (hub)
-│   ├── user_funnel.json          # Sankey · editorial, highlight mode
-│   ├── conversion_funnel.json    # Funnel · editorial
-│   ├── simula_sankey.json        # Sankey · simula dark brand (crossing-free)
-│   └── simula_funnel.json        # Funnel · simula dark brand
-└── output/                   # generated graphics (gitignored)
+├── examples/                 # 50 ready-to-render specs, ≥1 per chart type
+│                             #   (mostly editorial/a16z; a few simula dark-brand)
+└── output/                   # generated graphics + gallery.html (gitignored)
 ```
+
+Run `python scripts/build_gallery.py` to see all 50 examples at once. Each
+`examples/*.json` filename is descriptive (e.g. `category_growth_diverging.json`,
+`cloud_market_marimekko.json`, `latency_ridgeline.json`).
 
 **Extending:** add `scripts/charts/<type>.py` with a `@register("<type>")`
 renderer returning a Plotly `Figure`, then import it in
