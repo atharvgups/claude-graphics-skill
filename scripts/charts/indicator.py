@@ -16,7 +16,7 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
 from .base import apply_titles, register
-from theme import color_for_index
+from theme import color_for_index, hex_to_rgba
 
 
 def _delta(theme, reference, relative=False):
@@ -78,8 +78,10 @@ def render_gauge(spec: dict, theme: dict) -> go.Figure:
                     font=dict(family=theme["font_family"],
                               color=theme["title_color"], size=46)),
         delta=_delta(theme, target) if target is not None else None,
+        # Faint accent track so the FULL arc reads (a cream-on-cream track makes
+        # the unfilled portion invisible and the dial look broken/lopsided).
         gauge=dict(axis=dict(range=rng, tickfont=tick, tickcolor=grid),
-                   bar=dict(color=accent), bgcolor=theme["plot_bg"],
+                   bar=dict(color=accent), bgcolor=hex_to_rgba(accent, 0.16),
                    borderwidth=0,
                    threshold=dict(line=dict(color=color_for_index(theme, 4), width=4),
                                   value=target) if target is not None else None),

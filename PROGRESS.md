@@ -30,11 +30,11 @@ Scores are honest a16z-fidelity (1–5). "done" = the PNG truly looks studio-mad
 | radar | product_radar | done | 5 | verified: two filled polygons, dot legend |
 | slope | margin_slope | done | 5 | verified: risers teal / fallers rust, dual labels |
 | bump | model_bump | done | 5 | verified: smooth rank ribbons, right-edge labels |
-| candlestick | price_candlestick | todo | 3 | verify |
-| table | startups_table | todo | 3 | verify |
+| candlestick | price_candlestick | done | 5 | verified: teal/rust OHLC candles, wicks, $ axis |
+| table | startups_table | done | 5 | verified: navy header, zebra rows |
 | bignumber | kpi_bignumber | todo | 4 | verify |
-| gauge | nps_gauge | todo | 3 | verify |
-| bullet | quota_bullet | todo | 3 | verify |
+| gauge | nps_gauge | done | 5 | fixed: faint accent track so full arc reads |
+| bullet | quota_bullet | done | 5 | verified: teal bars, rust targets, big-number deltas |
 | sankey | budget/energy/user_funnel, simula | todo | 4 | heavily worked earlier; verify |
 | funnel | conversion_funnel, simula_funnel | todo | 4 | heavily worked earlier; verify |
 
