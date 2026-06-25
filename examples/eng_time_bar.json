@@ -1,0 +1,22 @@
+{
+  "chart_type": "bar",
+  "orientation": "h",
+  "title": "Where Engineering Time Actually Goes",
+  "subtitle": "Median hours per week per engineer, by activity",
+  "source": "Source: Fabricated sample data · claude-graphics-skill",
+  "theme": "editorial",
+  "value_format": ",.1f",
+  "value_suffix": " hrs",
+  "highlight": ["Code review & PR feedback"],
+  "note": "Review eats more time than<br>any task except writing code.",
+  "height": 620,
+  "width": 1040,
+  "bars": [
+    { "label": "Writing & shipping code", "value": 14.2 },
+    { "label": "Code review & PR feedback", "value": 8.6 },
+    { "label": "Meetings & standups", "value": 7.1 },
+    { "label": "Debugging production incidents", "value": 5.3 },
+    { "label": "Documentation & design docs", "value": 3.8 },
+    { "label": "Interviewing & hiring loops", "value": 2.4 }
+  ]
+}

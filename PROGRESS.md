@@ -68,7 +68,10 @@ Scores are honest a16z-fidelity (1–5). "done" = the PNG truly looks studio-mad
 30 registered chart types, all scoring 5; 45 examples; gallery renders clean;
 docs (SKILL/README/chart_types) in sync; ~/Downloads/graphics.skill rebuilt
 (115KB, no junk). Local commits only on `a16z-charts-expansion` — never pushed.
-Remaining: optional second-pass polish + extra examples per type.
+Second pass done: vertical-diverging fix; verified grouped bars, long-label
+auto-margin, and dark-theme (simula) robustness of all new furniture (dot legend,
+footer + crosshatch, zero line, diverging). Added grouped + long-label + vertical-
+diverging examples. 47 examples total.
 
 ## Log
 - a59a7fa baseline import (all current work).
