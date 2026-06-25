@@ -1,0 +1,24 @@
+{
+  "chart_type": "treemap",
+  "title": "The Open-Source AI Landscape, by Stars",
+  "subtitle": "GitHub stars across the most-starred AI & ML projects (thousands)",
+  "source": "Source: GitHub · stargazer counts, June 2026",
+  "theme": "editorial",
+  "value_format": ",.0f",
+  "value_suffix": "k",
+  "height": 660,
+  "width": 1080,
+  "items": [
+    { "label": "TensorFlow", "value": 196 },
+    { "label": "Ollama", "value": 175 },
+    { "label": "Stable Diffusion WebUI", "value": 164 },
+    { "label": "HF Transformers", "value": 162 },
+    { "label": "Dify", "value": 147 },
+    { "label": "Open WebUI", "value": 143 },
+    { "label": "LangChain", "value": 140 },
+    { "label": "ComfyUI", "value": 118 },
+    { "label": "llama.cpp", "value": 118 },
+    { "label": "Whisper", "value": 104 },
+    { "label": "PyTorch", "value": 101 }
+  ]
+}
