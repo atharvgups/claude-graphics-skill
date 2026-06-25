@@ -1,0 +1,19 @@
+{
+  "chart_type": "dot",
+  "title": "Model Context Windows, Ranked",
+  "subtitle": "Max input tokens, leading models (thousands)",
+  "source": "Source: Fabricated sample data · claude-graphics-skill",
+  "theme": "editorial",
+  "value_suffix": "K",
+  "highlight": ["Fable 5"],
+  "height": 600,
+  "width": 1040,
+  "items": [
+    { "label": "Fable 5", "value": 2000 },
+    { "label": "Atlas Pro", "value": 1000 },
+    { "label": "Orion-X", "value": 512 },
+    { "label": "Nova 2", "value": 256 },
+    { "label": "Sol-7", "value": 200 },
+    { "label": "Iris", "value": 128 }
+  ]
+}
