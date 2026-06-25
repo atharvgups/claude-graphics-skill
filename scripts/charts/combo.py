@@ -25,7 +25,8 @@ from __future__ import annotations
 
 import plotly.graph_objects as go
 
-from .base import add_circle_legend, apply_footer, apply_titles, register
+from .base import (add_circle_legend, apply_footer, apply_titles, edge_align,
+                   register)
 from theme import color_for_index
 
 # Distinct marker shapes per line — a16z separates overlapping lines by shape.
@@ -97,9 +98,13 @@ def render(spec: dict, theme: dict) -> go.Figure:
     add_circle_legend(fig, [bar.get("name", "Bar")] + [ln.get("name", f"Line {k+1}")
                             for k, ln in enumerate(lines)],
                       [bar_color] + line_colors, theme)
+    # Align headline/legend/footer to the canvas edge (not the plot edge).
+    al = edge_align(spec.get("width", 1080), 72, 78, 28)
+    fig.update_layout(legend=dict(x=al["legend_x"]))
     if has_footer:
-        apply_titles(fig, {**spec, "source": ""}, theme)
-        apply_footer(fig, spec, theme)
+        apply_titles(fig, {**spec, "source": ""}, theme, x_shift=al["x_shift"])
+        apply_footer(fig, spec, theme, x_shift=al["x_shift"],
+                     rule_x=al["rule_x"], wordmark_xshift=al["wordmark_xshift"])
     else:
-        apply_titles(fig, spec, theme)
+        apply_titles(fig, spec, theme, x_shift=al["x_shift"])
     return fig

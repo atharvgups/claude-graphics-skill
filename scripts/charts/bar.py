@@ -39,7 +39,7 @@ from __future__ import annotations
 import plotly.graph_objects as go
 
 from .base import (add_circle_legend, apply_footer, apply_titles,
-                   cartesian_axes, format_value, register)
+                   cartesian_axes, edge_align, format_value, register)
 from theme import hex_to_rgba
 
 
@@ -145,14 +145,22 @@ def _render_multi(spec: dict, theme: dict) -> go.Figure:
                   layer="below")
 
     has_footer = bool(spec.get("footer") or spec.get("wordmark"))
-    fig.update_layout(margin=dict(t=128, l=72, r=44,
+    left, right, pad = 72, 44, 28
+    fig.update_layout(margin=dict(t=128, l=left, r=right,
                                   b=300 if has_footer else 124))
 
+    # Pull all furniture (headline, legend, footer) out to the canvas edge so it
+    # aligns with the y-axis labels rather than indenting to the plot edge — the
+    # editorial standard the single-series bars already follow.
+    al = edge_align(spec.get("width", 1080), left, right, pad)
+    fig.update_layout(legend=dict(x=al["legend_x"]))
+
     if has_footer:
-        apply_titles(fig, {**spec, "source": ""}, theme)
-        apply_footer(fig, spec, theme)
+        apply_titles(fig, {**spec, "source": ""}, theme, x_shift=al["x_shift"])
+        apply_footer(fig, spec, theme, x_shift=al["x_shift"],
+                     rule_x=al["rule_x"], wordmark_xshift=al["wordmark_xshift"])
     else:
-        apply_titles(fig, spec, theme)
+        apply_titles(fig, spec, theme, x_shift=al["x_shift"])
     return fig
 
 

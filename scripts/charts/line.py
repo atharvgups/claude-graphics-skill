@@ -36,7 +36,7 @@ from __future__ import annotations
 import plotly.graph_objects as go
 
 from .base import (add_circle_legend, apply_footer, apply_titles,
-                   cartesian_axes, format_value, register)
+                   cartesian_axes, edge_align, format_value, register)
 from theme import hex_to_rgba
 
 # Dash cycle: the lead series stays solid (emphasis), the rest take distinct
@@ -205,15 +205,20 @@ def render(spec: dict, theme: dict) -> go.Figure:
     # coercing the axis to numeric (which silently collapses the data).
     if is_cat:
         fig.update_xaxes(type="category")
+    left = 62
     fig.update_layout(
-        margin=dict(t=120, l=62, r=right, b=bottom),
+        margin=dict(t=120, l=left, r=right, b=bottom),
         height=spec.get("height", 620),
         width=spec.get("width", 1040),
         hovermode="x unified",
     )
+    # Align headline/legend/footer to the canvas edge (not the plot edge).
+    al = edge_align(spec.get("width", 1040), left, right, 28)
+    fig.update_layout(legend=dict(x=al["legend_x"]))
     if has_footer:
-        apply_titles(fig, {**spec, "source": ""}, theme)
-        apply_footer(fig, spec, theme)
+        apply_titles(fig, {**spec, "source": ""}, theme, x_shift=al["x_shift"])
+        apply_footer(fig, spec, theme, x_shift=al["x_shift"],
+                     rule_x=al["rule_x"], wordmark_xshift=al["wordmark_xshift"])
     else:
-        apply_titles(fig, spec, theme)
+        apply_titles(fig, spec, theme, x_shift=al["x_shift"])
     return fig

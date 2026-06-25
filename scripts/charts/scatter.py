@@ -25,7 +25,8 @@ from __future__ import annotations
 
 import plotly.graph_objects as go
 
-from .base import apply_titles, cartesian_axes, register, style_legend
+from .base import (apply_titles, cartesian_axes, edge_align, register,
+                   style_legend)
 from theme import color_for_index, hex_to_rgba
 
 
@@ -168,5 +169,8 @@ def render(spec: dict, theme: dict) -> go.Figure:
         height=spec.get("height", 640),
         width=spec.get("width", 1000),
     )
-    apply_titles(fig, spec, theme)
+    # Align headline + legend to the canvas edge (not the plot edge).
+    al = edge_align(spec.get("width", 1000), 72, 40, 28)
+    fig.update_layout(legend=dict(x=al["legend_x"]))
+    apply_titles(fig, spec, theme, x_shift=al["x_shift"])
     return fig

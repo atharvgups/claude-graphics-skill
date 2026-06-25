@@ -281,6 +281,27 @@ def _footer_texture(fig, theme, rule_y, x0=0.0, x1=1.0, *, run=0.045,
         )
 
 
+def edge_align(width, left, right, pad=28):
+    """
+    Offsets that pull the headline / legend / footer out to the **canvas edge**
+    (pad px from each side) instead of indenting them to the plot area, so the
+    furniture lines up with the axis labels — the a16z standard. Cartesian charts
+    with a y-axis label column would otherwise indent their title by the label
+    width. Returns the pieces each renderer needs:
+      * x_shift          — px nudge for apply_titles / apply_footer text
+      * legend_x         — paper x for a left-aligned legend
+      * rule_x           — paper (x0, x1) for a full-bleed footer rule + texture
+      * wordmark_xshift  — px nudge to right-align the wordmark to the canvas edge
+    """
+    plot_w = max(width - left - right, 1)
+    return dict(
+        x_shift=-(left - pad),
+        legend_x=(pad - left) / plot_w,
+        rule_x=((pad - left) / plot_w, 1 + (right - pad) / plot_w),
+        wordmark_xshift=(right - pad),
+    )
+
+
 def apply_footer(fig, spec, theme, source_y=-0.30, rule_y=-0.38, x_shift=0,
                  rule_x=(0.0, 1.0), wordmark_xshift=0):
     """
