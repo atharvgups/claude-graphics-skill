@@ -359,12 +359,19 @@ def render(spec: dict, theme: dict) -> go.Figure:
     # the rest go solid-muted (warm neutral), matching the horizontal path so the
     # two orientations read as one family.
     accent = theme["palette"][0]
+    neg_c = theme["palette"][4 % len(theme["palette"])]  # rust, for negatives
     muted = theme.get("bar_muted") or hex_to_rgba(theme["font_color"], 0.30)
+    title_c = theme["title_color"]
     highlight = _resolve_highlight(spec, labels)
+    # Diverging columns (some negative values): positive=accent, negative=rust,
+    # with a zero baseline — matches the horizontal path.
+    diverging = bool(spec.get("diverging")) or any(v < 0 for v in values)
     colors = []
     for i, bar in enumerate(bars):
         if bar.get("color"):
             colors.append(bar["color"])
+        elif diverging and highlight is None:
+            colors.append(accent if values[i] >= 0 else neg_c)
         elif highlight is None:
             colors.append(accent)
         else:
@@ -373,10 +380,12 @@ def render(spec: dict, theme: dict) -> go.Figure:
     text = [format_value(v, spec) for v in values]
     grid = theme.get("grid_color", "rgba(0,0,0,0.08)")
 
-    # Value axis range with headroom so outside labels never clip.
+    # Value axis range with headroom so outside labels never clip. Diverging
+    # charts get extra room BELOW so negative labels clear the x-axis labels.
     lo, hi = min(values + [0]), max(values + [0])
     span = (hi - lo) or 1.0
-    axis_range = [lo - span * 0.02 if lo < 0 else 0, hi + span * 0.16]
+    axis_range = ([lo - span * 0.16, hi + span * 0.16] if diverging
+                  else [0, hi + span * 0.16])
 
     fig = go.Figure(go.Bar(
         x=labels, y=values, textposition="outside",
@@ -392,6 +401,10 @@ def render(spec: dict, theme: dict) -> go.Figure:
     fig.update_yaxes(showgrid=True, gridcolor=grid, zeroline=False,
                      showline=False, ticks="", showticklabels=False,
                      range=axis_range)
+    if diverging:
+        # Visible zero divider between positive and negative columns.
+        fig.add_hline(y=0, line=dict(color=hex_to_rgba(title_c, 0.5), width=1.6),
+                      layer="below")
     fig.update_layout(margin=dict(t=120, l=24, r=24, b=70))
 
     fig.update_traces(textfont=dict(family=theme["font_family"],

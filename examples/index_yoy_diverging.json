@@ -1,0 +1,21 @@
+{
+  "chart_type": "bar",
+  "orientation": "v",
+  "title": "Some Years the Market Gave It Back",
+  "subtitle": "Year-over-year change in the index (%)",
+  "source": "Source: Fabricated sample data · claude-graphics-skill",
+  "theme": "editorial",
+  "value_suffix": "%",
+  "height": 620,
+  "width": 1040,
+  "bars": [
+    { "label": "2019", "value": 28 },
+    { "label": "2020", "value": 16 },
+    { "label": "2021", "value": 27 },
+    { "label": "2022", "value": -19 },
+    { "label": "2023", "value": 24 },
+    { "label": "2024", "value": 23 },
+    { "label": "2025", "value": -6 },
+    { "label": "2026", "value": 12 }
+  ]
+}

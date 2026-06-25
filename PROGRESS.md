@@ -12,6 +12,8 @@ Scores are honest a16z-fidelity (1–5). "done" = the PNG truly looks studio-mad
 | bar — horizontal | tool_ranking_bar | done | 5 | reference standard (callout, full-bleed rule, num-hero) |
 | bar — vertical | ai_spend_bar | done | 5 | callout + rule + rounded caps |
 | bar — diverging stacked | manufacturing_construction | done | 5 | matches a16z reference chart 4 |
+| bar — diverging vertical | index_yoy_diverging | done | 5 | 2nd pass: rust negatives, zero line, labels clear x-axis |
+| bar — diverging horizontal | category_growth_diverging | done | 5 | teal-right/rust-left from central zero |
 | bar — grouped/100% | venture_stacked_bar, channel_mix_percent_bar | done | 5 | verified: full stacks, dot legend, % axis |
 | line — multi | valuation_line | done | 5 | line_palette + dash cycle + circle legend + end-value labels |
 | line — single | machinery_line | done | 5 | no legend, halo markers, end-value label (fixed cat-axis collapse bug) |
