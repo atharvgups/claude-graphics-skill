@@ -1,0 +1,23 @@
+{
+  "chart_type": "scatter",
+  "title": "The Long Road Back to 2% Inflation",
+  "subtitle": "U.S. unemployment vs. inflation, traced year by year",
+  "source": "Source: Fabricated sample data · claude-graphics-skill",
+  "theme": "editorial",
+  "x_title": "Unemployment rate (%)",
+  "y_title": "Inflation rate (%)",
+  "show_labels": true,
+  "connect": true,
+  "height": 660,
+  "width": 1020,
+  "points": [
+    { "x": 3.7, "y": 1.8, "label": "2019" },
+    { "x": 8.1, "y": 1.2, "label": "2020" },
+    { "x": 5.4, "y": 4.7, "label": "2021" },
+    { "x": 3.6, "y": 8.0, "label": "2022" },
+    { "x": 3.6, "y": 4.1, "label": "2023" },
+    { "x": 4.0, "y": 2.9, "label": "2024" },
+    { "x": 4.3, "y": 2.4, "label": "2025" },
+    { "x": 4.4, "y": 2.1, "label": "2026" }
+  ]
+}

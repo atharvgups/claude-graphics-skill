@@ -140,6 +140,10 @@ label[s]) accents the story point(s) and mutes the rest.
   "points": [ { "x": 55, "y": 117, "label": "Business", "size": 260 } ] }
 ```
 
+**Connected (path) scatter**: `connect: true` threads a spline through the points
+in array order to trace a trajectory over time (e.g. unemployment vs. inflation,
+year by year) — give each point a `label` (the time stamp) and `show_labels`.
+
 **2×2 quadrant** (a16z positioning framework): add `quadrants` to draw dotted
 midpoint dividers (auto, or set `x`/`y`) and up to four muted corner `labels`
 (`tr`/`tl`/`bl`/`br`). Gridlines drop out so the two dividers carry the framing.

@@ -140,6 +140,15 @@ def render(spec: dict, theme: dict) -> go.Figure:
                     line=dict(color=hex_to_rgba(accent, 0.5), width=2, dash="dash"),
                     hoverinfo="skip", showlegend=False))
 
+        # Connected (path) scatter: a line threads the points in order to trace a
+        # trajectory through x/y over time (a16z "path" charts).
+        if spec.get("connect"):
+            fig.add_trace(go.Scatter(
+                x=[p["x"] for p in points], y=[p["y"] for p in points],
+                mode="lines", line=dict(color=hex_to_rgba(accent, 0.55),
+                                        width=2.5, shape="spline"),
+                hoverinfo="skip", showlegend=False))
+
         render_points(fig, points, "", colors, theme, show_labels, label_colors)
         fig.update_layout(showlegend=False)
         bottom = 70
