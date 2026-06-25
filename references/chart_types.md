@@ -118,11 +118,14 @@ shape** (circle, diamond, square…). Each side sets `axis_title`/`prefix`/`suff
 
 ## scatter — incl. bubble
 
-`points` (or grouped `series` of points). `size` per point → bubble; `show_labels`
-annotates points; `x_title`/`y_title` label axes.
+`points` (or grouped `series` of points). `size` per point → bubble (haloed for
+crispness); `show_labels` annotates points in navy; `x_title`/`y_title` label
+axes. `trendline: true` adds a dashed least-squares fit; `highlight` (point
+label[s]) accents the story point(s) and mutes the rest.
 
 ```jsonc
-{ "chart_type": "scatter", "show_labels": true, "x_title": "ACV ($K)", "y_title": "Retention (%)",
+{ "chart_type": "scatter", "show_labels": true, "trendline": true,
+  "x_title": "ACV ($K)", "y_title": "Retention (%)", "highlight": ["Strategic"],
   "points": [ { "x": 55, "y": 117, "label": "Business", "size": 260 } ] }
 ```
 

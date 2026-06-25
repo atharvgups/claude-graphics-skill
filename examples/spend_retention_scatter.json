@@ -2,7 +2,7 @@
   "chart_type": "scatter",
   "title": "Bigger Customers Stick Around",
   "subtitle": "Net revenue retention vs. annual contract value (bubble = seats)",
-  "source": "Source: Fabricated sample data · claude-graphics-skill",
+  "source": "Source: Fabricated sample data \u00b7 claude-graphics-skill",
   "theme": "editorial",
   "x_title": "Annual contract value ($K)",
   "y_title": "Net revenue retention (%)",
@@ -10,10 +10,36 @@
   "height": 640,
   "width": 1020,
   "points": [
-    { "x": 8, "y": 92, "label": "Starter", "size": 40 },
-    { "x": 22, "y": 104, "label": "Team", "size": 120 },
-    { "x": 55, "y": 117, "label": "Business", "size": 260 },
-    { "x": 140, "y": 128, "label": "Enterprise", "size": 520 },
-    { "x": 320, "y": 141, "label": "Strategic", "size": 900 }
-  ]
+    {
+      "x": 8,
+      "y": 92,
+      "label": "Starter",
+      "size": 40
+    },
+    {
+      "x": 22,
+      "y": 104,
+      "label": "Team",
+      "size": 120
+    },
+    {
+      "x": 55,
+      "y": 117,
+      "label": "Business",
+      "size": 260
+    },
+    {
+      "x": 140,
+      "y": 128,
+      "label": "Enterprise",
+      "size": 520
+    },
+    {
+      "x": 320,
+      "y": 141,
+      "label": "Strategic",
+      "size": 900
+    }
+  ],
+  "trendline": true
 }

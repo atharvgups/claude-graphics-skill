@@ -17,7 +17,7 @@ Scores are honest a16z-fidelity (1–5). "done" = the PNG truly looks studio-mad
 | line — single | machinery_line | done | 5 | no legend, halo markers, end-value label (fixed cat-axis collapse bug) |
 | area | rtd_share_area | done | 5 | gradient fill + halo markers + per-point value labels; cat-axis hardened |
 | combo | inference_combo, industrial_imports_combo | done | 5 | multi-line on RHS + distinct marker shapes; rounded bars; dot legend |
-| scatter/bubble | spend_retention_scatter | todo | 3 | verify quadrant/label style |
+| scatter/bubble | spend_retention_scatter | done | 5 | halo markers, navy labels, optional trendline + highlight |
 | pie/donut | revenue_mix_pie | todo | 3 | a16z rarely uses; verify or de-emphasize |
 | waterfall | arr_waterfall | todo | 3 | verify connector/label style |
 | dot (lollipop/dumbbell) | adoption_dumbbell | todo | 4 | built decently; verify |
