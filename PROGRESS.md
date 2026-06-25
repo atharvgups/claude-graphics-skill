@@ -22,10 +22,10 @@ Scores are honest a16z-fidelity (1–5). "done" = the PNG truly looks studio-mad
 | waterfall | arr_waterfall | done | 5 | fixed negative fmt (-$9M); teal gains/rust losses/navy totals |
 | dot (lollipop/dumbbell) | adoption_dumbbell | todo | 4 | built decently; verify |
 | heatmap | retention_heatmap | done | 5 | triangular cohort grid: null cells render blank |
-| treemap | spend_treemap | todo | 3 | verify |
-| sunburst | spend_sunburst | todo | 3 | verify |
-| small_multiples | regions_small_multiples | todo | 3 | verify |
-| histogram | deal_size_histogram | todo | 3 | verify |
+| treemap | spend_treemap | done | 5 | verified: value-sized cells, direct labels, palette |
+| sunburst | spend_sunburst | done | 5 | verified: nested hierarchy, labeled segments |
+| small_multiples | regions_small_multiples | done | 5 | verified: shared-scale 2x3 grid, clean |
+| histogram | deal_size_histogram | done | 5 | verified: clean distribution, axis titles |
 | box/violin | latency_box | todo | 3 | verify |
 | radar | product_radar | todo | 3 | verify |
 | slope | margin_slope | todo | 3 | verify |
