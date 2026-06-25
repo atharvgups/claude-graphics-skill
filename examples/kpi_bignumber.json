@@ -1,0 +1,15 @@
+{
+  "chart_type": "bignumber",
+  "title": "The Quarter at a Glance",
+  "subtitle": "Headline metrics vs. last quarter",
+  "source": "Source: Fabricated sample data · claude-graphics-skill",
+  "theme": "editorial",
+  "height": 320,
+  "width": 1080,
+  "metrics": [
+    { "label": "ARR ($M)", "value": 42.0, "reference": 31.0 },
+    { "label": "Net retention", "value": 141, "reference": 128 },
+    { "label": "Customers", "value": 1840, "reference": 1510 },
+    { "label": "Gross margin %", "value": 78, "reference": 74 }
+  ]
+}

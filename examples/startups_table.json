@@ -1,0 +1,17 @@
+{
+  "chart_type": "table",
+  "title": "The AI-Native Cohort",
+  "subtitle": "Top performers by ARR growth, FY2026",
+  "source": "Source: Fabricated sample data · claude-graphics-skill",
+  "theme": "editorial",
+  "height": 420,
+  "width": 980,
+  "columns": ["Company", "ARR ($M)", "YoY growth", "Net retention", "Headcount"],
+  "rows": [
+    ["Simula", "42", "+220%", "141%", "85"],
+    ["Northwind", "31", "+150%", "128%", "120"],
+    ["Globex", "28", "+112%", "119%", "96"],
+    ["Initech", "19", "+88%", "115%", "64"],
+    ["Hooli", "14", "+76%", "108%", "210"]
+  ]
+}

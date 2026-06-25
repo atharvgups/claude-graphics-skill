@@ -1,0 +1,16 @@
+{
+  "chart_type": "bump",
+  "title": "The Leaderboard Keeps Reshuffling",
+  "subtitle": "Monthly rank by benchmark score (1 = best)",
+  "source": "Source: Fabricated sample data · claude-graphics-skill",
+  "theme": "editorial",
+  "height": 600,
+  "width": 1040,
+  "x": ["Jan", "Mar", "May", "Jul", "Sep"],
+  "series": [
+    { "name": "Fable", "values": [82, 86, 91, 95, 98] },
+    { "name": "Atlas", "values": [88, 89, 90, 90, 91] },
+    { "name": "Orion", "values": [80, 84, 88, 92, 94] },
+    { "name": "Nova", "values": [90, 87, 85, 83, 82] }
+  ]
+}

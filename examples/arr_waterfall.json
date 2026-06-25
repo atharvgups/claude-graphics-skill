@@ -1,0 +1,19 @@
+{
+  "chart_type": "waterfall",
+  "title": "How ARR Grew This Year",
+  "subtitle": "$M, from starting to ending ARR",
+  "source": "Source: Fabricated sample data · claude-graphics-skill",
+  "theme": "editorial",
+  "value_prefix": "$",
+  "value_suffix": "M",
+  "height": 620,
+  "width": 1040,
+  "steps": [
+    { "label": "Start ARR", "value": 100, "type": "absolute" },
+    { "label": "New", "value": 42 },
+    { "label": "Expansion", "value": 23 },
+    { "label": "Contraction", "value": -9 },
+    { "label": "Churn", "value": -18 },
+    { "label": "End ARR", "value": 138, "type": "total" }
+  ]
+}

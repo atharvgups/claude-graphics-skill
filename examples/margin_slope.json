@@ -1,0 +1,18 @@
+{
+  "chart_type": "slope",
+  "title": "Gross Margins Moved in Both Directions",
+  "subtitle": "Gross margin by segment, 2024 → 2026",
+  "source": "Source: Fabricated sample data · claude-graphics-skill",
+  "theme": "editorial",
+  "value_suffix": "%",
+  "left_label": "2024",
+  "right_label": "2026",
+  "height": 660,
+  "width": 880,
+  "items": [
+    { "label": "Platform", "start": 62, "end": 78 },
+    { "label": "Services", "start": 41, "end": 33 },
+    { "label": "Hardware", "start": 28, "end": 22 },
+    { "label": "Marketplace", "start": 55, "end": 71 }
+  ]
+}

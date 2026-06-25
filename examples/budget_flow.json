@@ -1,0 +1,36 @@
+{
+  "chart_type": "sankey",
+  "title": "Where the Series A Went",
+  "subtitle": "$14M raised → how Simula deployed it across 18 months",
+  "source": "Source: Fabricated sample data · claude-graphics-skill",
+  "theme": "editorial",
+  "value_format": ",.1f",
+  "value_prefix": "$",
+  "value_suffix": "M",
+  "show_values_in_labels": true,
+  "height": 680,
+  "width": 1150,
+  "nodes": [
+    { "id": "raise", "label": "Series A" },
+    { "id": "rnd", "label": "R&D" },
+    { "id": "gtm", "label": "Go-to-Market" },
+    { "id": "ops", "label": "Operations" },
+    { "id": "eng", "label": "Engineering" },
+    { "id": "ml", "label": "ML / Research" },
+    { "id": "sales", "label": "Sales" },
+    { "id": "mktg", "label": "Marketing" },
+    { "id": "ga", "label": "G&A" },
+    { "id": "infra", "label": "Cloud & Infra" }
+  ],
+  "links": [
+    { "source": "raise", "target": "rnd", "value": 7.0 },
+    { "source": "raise", "target": "gtm", "value": 4.5 },
+    { "source": "raise", "target": "ops", "value": 2.5 },
+    { "source": "rnd", "target": "eng", "value": 4.2 },
+    { "source": "rnd", "target": "ml", "value": 2.8 },
+    { "source": "gtm", "target": "sales", "value": 2.7 },
+    { "source": "gtm", "target": "mktg", "value": 1.8 },
+    { "source": "ops", "target": "ga", "value": 1.3 },
+    { "source": "ops", "target": "infra", "value": 1.2 }
+  ]
+}

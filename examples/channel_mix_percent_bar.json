@@ -1,0 +1,17 @@
+{
+  "chart_type": "bar",
+  "title": "Revenue Mix Is Shifting to Product-Led",
+  "subtitle": "Share of new revenue by channel, by year (100% stacked)",
+  "source": "Source: Fabricated sample data · claude-graphics-skill",
+  "theme": "editorial",
+  "percent": true,
+  "height": 620,
+  "width": 1040,
+  "x": ["2022", "2023", "2024", "2025", "2026"],
+  "series": [
+    { "name": "Product-led", "values": [10, 18, 30, 44, 58] },
+    { "name": "Sales-led", "values": [60, 55, 48, 40, 30] },
+    { "name": "Partnerships", "values": [20, 18, 15, 11, 8] },
+    { "name": "Other", "values": [10, 9, 7, 5, 4] }
+  ]
+}

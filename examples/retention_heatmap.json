@@ -1,0 +1,20 @@
+{
+  "chart_type": "heatmap",
+  "title": "Cohort Retention Decays Predictably",
+  "subtitle": "% of each signup cohort still active, by month since signup",
+  "source": "Source: Fabricated sample data · claude-graphics-skill",
+  "theme": "editorial",
+  "value_suffix": "%",
+  "show_values": true,
+  "height": 560,
+  "width": 1040,
+  "x": ["M0", "M1", "M2", "M3", "M4", "M5"],
+  "y": ["Jan", "Feb", "Mar", "Apr", "May"],
+  "z": [
+    [100, 64, 48, 39, 33, 29],
+    [100, 67, 51, 42, 36, 31],
+    [100, 70, 55, 46, 40, 35],
+    [100, 72, 58, 49, 43, 0],
+    [100, 75, 61, 0, 0, 0]
+  ]
+}

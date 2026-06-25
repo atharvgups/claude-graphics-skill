@@ -1,0 +1,13 @@
+{
+  "chart_type": "histogram",
+  "title": "Most Deals Cluster Under $50K",
+  "subtitle": "Distribution of closed-won deal sizes this year",
+  "source": "Source: Fabricated sample data · claude-graphics-skill",
+  "theme": "editorial",
+  "x_title": "Deal size ($K)",
+  "y_title": "Number of deals",
+  "bins": 24,
+  "height": 600,
+  "width": 1040,
+  "values": [8, 12, 15, 9, 22, 31, 18, 25, 11, 14, 19, 27, 33, 41, 17, 23, 29, 12, 16, 21, 38, 44, 52, 13, 9, 18, 26, 35, 47, 61, 14, 19, 24, 28, 33, 7, 11, 16, 22, 29, 36, 43, 58, 72, 10, 15, 20, 25, 30, 39, 48, 55, 68, 88, 12, 17, 23, 31, 42, 50]
+}

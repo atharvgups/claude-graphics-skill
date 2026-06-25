@@ -1,0 +1,23 @@
+{
+  "chart_type": "bar",
+  "title": "Where Teams Say AI Saves Them Time",
+  "subtitle": "Median hours saved per person per week, by workflow",
+  "source": "Source: Fabricated sample data · claude-graphics-skill",
+  "theme": "editorial",
+  "value_format": ",.1f",
+  "value_prefix": "",
+  "value_suffix": " hrs",
+  "orientation": "h",
+  "highlight": ["Writing code"],
+  "note": "Code generation leads every workflow —<br>~50% ahead of the next-closest task.",
+  "height": 600,
+  "width": 1040,
+  "bars": [
+    { "label": "Writing code", "value": 7.4 },
+    { "label": "Drafting docs", "value": 5.1 },
+    { "label": "Data analysis", "value": 4.3 },
+    { "label": "Customer support", "value": 3.6 },
+    { "label": "Meeting notes", "value": 2.8 },
+    { "label": "Scheduling", "value": 1.5 }
+  ]
+}

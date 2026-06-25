@@ -1,0 +1,36 @@
+{
+  "chart_type": "sankey",
+  "title": "National Energy Flow",
+  "subtitle": "Primary sources to end use, 2025 (terawatt-hours)",
+  "source": "Source: Fabricated sample data · claude-graphics-skill",
+  "theme": "editorial",
+  "value_format": ",.0f",
+  "value_prefix": "",
+  "value_suffix": " TWh",
+  "show_values_in_labels": true,
+  "height": 700,
+  "width": 1200,
+  "nodes": [
+    { "id": "solar", "label": "Solar" },
+    { "id": "wind", "label": "Wind" },
+    { "id": "hydro", "label": "Hydro" },
+    { "id": "gas", "label": "Natural Gas" },
+    { "id": "nuclear", "label": "Nuclear" },
+    { "id": "grid", "label": "Electricity Grid" },
+    { "id": "residential", "label": "Residential" },
+    { "id": "industry", "label": "Industry" },
+    { "id": "transport", "label": "Transport" },
+    { "id": "losses", "label": "Transmission Losses" }
+  ],
+  "links": [
+    { "source": "solar", "target": "grid", "value": 180 },
+    { "source": "wind", "target": "grid", "value": 240 },
+    { "source": "hydro", "target": "grid", "value": 130 },
+    { "source": "gas", "target": "grid", "value": 320 },
+    { "source": "nuclear", "target": "grid", "value": 210 },
+    { "source": "grid", "target": "residential", "value": 360 },
+    { "source": "grid", "target": "industry", "value": 410 },
+    { "source": "grid", "target": "transport", "value": 230 },
+    { "source": "grid", "target": "losses", "value": 80 }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "chart_type": "small_multiples",
+  "title": "Growth Is Broad-Based Across Regions",
+  "subtitle": "Quarterly revenue index by region (Q1'24 = 100)",
+  "source": "Source: Fabricated sample data · claude-graphics-skill",
+  "theme": "editorial",
+  "panel_type": "line",
+  "fill": true,
+  "columns": 3,
+  "shared_y": true,
+  "x": ["Q1'24", "Q2'24", "Q3'24", "Q4'24", "Q1'25", "Q2'25"],
+  "panels": [
+    { "title": "North America", "values": [100, 112, 121, 134, 150, 168] },
+    { "title": "Europe", "values": [100, 108, 115, 124, 136, 149] },
+    { "title": "LATAM", "values": [100, 118, 139, 165, 196, 232] },
+    { "title": "APAC", "values": [100, 121, 147, 178, 215, 260] },
+    { "title": "Middle East", "values": [100, 106, 114, 123, 133, 145] },
+    { "title": "Africa", "values": [100, 125, 158, 199, 251, 318] }
+  ]
+}

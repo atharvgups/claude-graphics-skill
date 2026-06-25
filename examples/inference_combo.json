@@ -1,0 +1,21 @@
+{
+  "chart_type": "combo",
+  "title": "Jevons in Action: Prices Fall, Demand Explodes",
+  "subtitle": "Token price vs. tokens consumed, monthly",
+  "source": "Source: Fabricated sample data · claude-graphics-skill",
+  "theme": "editorial",
+  "height": 640,
+  "width": 1100,
+  "x": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+  "bar": {
+    "name": "Tokens consumed (B)",
+    "axis_title": "Tokens consumed (B)",
+    "values": [2, 3, 5, 7, 11, 16, 24, 33, 46, 61, 80, 104]
+  },
+  "line": {
+    "name": "Price ($/1M tokens)",
+    "axis_title": "Price ($/1M tokens)",
+    "prefix": "$",
+    "values": [2.0, 1.85, 1.6, 1.4, 1.15, 0.95, 0.78, 0.66, 0.55, 0.47, 0.4, 0.35]
+  }
+}

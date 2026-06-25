@@ -1,0 +1,19 @@
+{
+  "chart_type": "funnel",
+  "title": "From Impression to Conversion",
+  "subtitle": "How an AI Brand Ambassador campaign turns reach into revenue",
+  "source": "Source: Fabricated sample data · Simula",
+  "theme": "simula",
+  "value_format": ",.0f",
+  "value_prefix": "",
+  "value_suffix": "",
+  "height": 640,
+  "width": 1040,
+  "stages": [
+    { "label": "Ad impressions", "value": 1200000 },
+    { "label": "Engaged with ad", "value": 384000 },
+    { "label": "Started AI conversation", "value": 96000 },
+    { "label": "Qualified intent", "value": 31000 },
+    { "label": "Converted", "value": 8400 }
+  ]
+}

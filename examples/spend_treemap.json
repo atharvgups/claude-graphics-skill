@@ -1,0 +1,18 @@
+{
+  "chart_type": "treemap",
+  "title": "Where the Cloud Bill Goes",
+  "subtitle": "Monthly infrastructure spend by service ($K)",
+  "source": "Source: Fabricated sample data · claude-graphics-skill",
+  "theme": "editorial",
+  "height": 640,
+  "width": 1040,
+  "items": [
+    { "label": "Compute", "value": 420 },
+    { "label": "Storage", "value": 180 },
+    { "label": "Networking", "value": 95 },
+    { "label": "Databases", "value": 140 },
+    { "label": "AI / GPU", "value": 310 },
+    { "label": "Observability", "value": 60 },
+    { "label": "Other", "value": 45 }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "chart_type": "gauge",
+  "title": "Net Promoter Score",
+  "subtitle": "Current quarter vs. target of 50",
+  "source": "Source: Fabricated sample data · claude-graphics-skill",
+  "theme": "editorial",
+  "value": 62,
+  "target": 50,
+  "range": [0, 100],
+  "height": 500,
+  "width": 760
+}

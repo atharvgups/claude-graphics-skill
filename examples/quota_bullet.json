@@ -1,0 +1,17 @@
+{
+  "chart_type": "bullet",
+  "title": "Tracking to Plan",
+  "subtitle": "Actual vs. target by team, Q3 (▲ marker = target)",
+  "source": "Source: Fabricated sample data · claude-graphics-skill",
+  "theme": "editorial",
+  "value_prefix": "$",
+  "value_suffix": "K",
+  "height": 460,
+  "width": 1000,
+  "items": [
+    { "label": "Enterprise", "value": 920, "target": 800, "max": 1100 },
+    { "label": "Mid-market", "value": 540, "target": 600, "max": 1100 },
+    { "label": "SMB", "value": 310, "target": 300, "max": 1100 },
+    { "label": "Partnerships", "value": 180, "target": 250, "max": 1100 }
+  ]
+}

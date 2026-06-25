@@ -1,0 +1,19 @@
+{
+  "chart_type": "bar",
+  "title": "Venture Dollars Are Concentrating in Late Stage",
+  "subtitle": "Global venture volume by stage, quarterly",
+  "source": "Source: Fabricated sample data · claude-graphics-skill",
+  "theme": "editorial",
+  "value_prefix": "$",
+  "value_suffix": "B",
+  "stacked": true,
+  "height": 640,
+  "width": 1100,
+  "x": ["Q1'24", "Q2'24", "Q3'24", "Q4'24", "Q1'25", "Q2'25", "Q3'25", "Q4'25", "Q1'26"],
+  "series": [
+    { "name": "Angel / Seed", "values": [9, 10, 8, 9, 10, 11, 9, 11, 12] },
+    { "name": "Early Stage", "values": [34, 30, 32, 28, 36, 38, 30, 41, 44] },
+    { "name": "Late Stage", "values": [33, 25, 33, 25, 40, 55, 28, 58, 230] },
+    { "name": "Growth", "values": [9, 7, 8, 7, 12, 14, 6, 9, 14] }
+  ]
+}

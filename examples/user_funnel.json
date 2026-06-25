@@ -1,0 +1,31 @@
+{
+  "chart_type": "sankey",
+  "title": "From Signup to Paid",
+  "subtitle": "How 10,000 trial signups convert — and where they leak",
+  "source": "Source: Fabricated sample data · claude-graphics-skill",
+  "theme": "editorial",
+  "value_format": ",.0f",
+  "value_prefix": "",
+  "value_suffix": " users",
+  "show_values_in_labels": true,
+  "highlight": ["signup", "activated", "habit", "paid"],
+  "height": 640,
+  "width": 1150,
+  "nodes": [
+    { "id": "signup", "label": "Signups" },
+    { "id": "activated", "label": "Activated" },
+    { "id": "dormant", "label": "Never activated" },
+    { "id": "habit", "label": "Weekly active" },
+    { "id": "churned_trial", "label": "Churned in trial" },
+    { "id": "paid", "label": "Converted to paid" },
+    { "id": "lapsed", "label": "Lapsed" }
+  ],
+  "links": [
+    { "source": "signup", "target": "activated", "value": 6200 },
+    { "source": "signup", "target": "dormant", "value": 3800 },
+    { "source": "activated", "target": "habit", "value": 3900 },
+    { "source": "activated", "target": "churned_trial", "value": 2300 },
+    { "source": "habit", "target": "paid", "value": 2600 },
+    { "source": "habit", "target": "lapsed", "value": 1300 }
+  ]
+}

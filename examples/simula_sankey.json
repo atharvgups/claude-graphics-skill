@@ -1,0 +1,38 @@
+{
+  "chart_type": "sankey",
+  "title": "How Simula Turns Reach Into Revenue",
+  "subtitle": "Where 12M ad impressions flow — from format to pipeline",
+  "source": "Source: Fabricated sample data · Simula",
+  "theme": "simula",
+  "value_format": ",.0f",
+  "value_prefix": "",
+  "value_suffix": "",
+  "show_values_in_labels": true,
+  "height": 660,
+  "width": 1160,
+  "nodes": [
+    { "id": "impressions", "label": "Impressions" },
+    { "id": "interactive", "label": "Interactive Ambassador" },
+    { "id": "video", "label": "Video" },
+    { "id": "display", "label": "Display" },
+    { "id": "bounced", "label": "Scrolled past" },
+    { "id": "engaged", "label": "Engaged" },
+    { "id": "conversation", "label": "AI Conversation" },
+    { "id": "nurture", "label": "Nurture" },
+    { "id": "pipeline", "label": "Sales Pipeline" },
+    { "id": "dropped", "label": "Dropped off" }
+  ],
+  "links": [
+    { "source": "impressions", "target": "interactive", "value": 3000000 },
+    { "source": "impressions", "target": "video", "value": 2500000 },
+    { "source": "impressions", "target": "display", "value": 1500000 },
+    { "source": "impressions", "target": "bounced", "value": 5000000 },
+    { "source": "interactive", "target": "engaged", "value": 3000000 },
+    { "source": "video", "target": "engaged", "value": 2500000 },
+    { "source": "display", "target": "engaged", "value": 1500000 },
+    { "source": "engaged", "target": "conversation", "value": 2600000 },
+    { "source": "engaged", "target": "nurture", "value": 4400000 },
+    { "source": "conversation", "target": "pipeline", "value": 1000000 },
+    { "source": "conversation", "target": "dropped", "value": 1600000 }
+  ]
+}

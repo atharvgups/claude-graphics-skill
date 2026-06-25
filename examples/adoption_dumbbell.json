@@ -1,0 +1,20 @@
+{
+  "chart_type": "dot",
+  "title": "AI Adoption Jumped Across Every Function",
+  "subtitle": "Share of teams using AI daily — 2024 vs 2026",
+  "source": "Source: Fabricated sample data · claude-graphics-skill",
+  "theme": "editorial",
+  "value_suffix": "%",
+  "start_name": "2024",
+  "end_name": "2026",
+  "height": 600,
+  "width": 1020,
+  "items": [
+    { "label": "Engineering", "start": 34, "end": 78 },
+    { "label": "Marketing", "start": 21, "end": 64 },
+    { "label": "Support", "start": 18, "end": 59 },
+    { "label": "Sales", "start": 12, "end": 47 },
+    { "label": "Finance", "start": 6, "end": 31 },
+    { "label": "Legal", "start": 4, "end": 22 }
+  ]
+}

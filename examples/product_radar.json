@@ -1,0 +1,14 @@
+{
+  "chart_type": "radar",
+  "title": "How We Stack Up",
+  "subtitle": "Capability scores (0–10), us vs. the category leader",
+  "source": "Source: Fabricated sample data · claude-graphics-skill",
+  "theme": "editorial",
+  "axes": ["Speed", "Accuracy", "Cost", "Integrations", "Support", "Ease of use"],
+  "height": 640,
+  "width": 860,
+  "series": [
+    { "name": "Simula", "values": [9, 8, 7, 6, 9, 8] },
+    { "name": "Incumbent", "values": [6, 9, 5, 9, 6, 5] }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "chart_type": "sunburst",
+  "title": "Where the Cloud Bill Goes",
+  "subtitle": "Monthly infrastructure spend, nested by area ($K)",
+  "source": "Source: Fabricated sample data · claude-graphics-skill",
+  "theme": "editorial",
+  "height": 680,
+  "width": 900,
+  "items": [
+    { "label": "Compute", "value": 0 },
+    { "label": "Storage", "value": 0 },
+    { "label": "AI / GPU", "value": 0 },
+    { "label": "EC2", "value": 240, "parent": "Compute" },
+    { "label": "Lambda", "value": 90, "parent": "Compute" },
+    { "label": "Kubernetes", "value": 110, "parent": "Compute" },
+    { "label": "S3", "value": 120, "parent": "Storage" },
+    { "label": "EBS", "value": 70, "parent": "Storage" },
+    { "label": "Training", "value": 220, "parent": "AI / GPU" },
+    { "label": "Inference", "value": 160, "parent": "AI / GPU" }
+  ]
+}

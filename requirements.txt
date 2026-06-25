@@ -1,0 +1,7 @@
+# Core rendering engine. Plotly produces interactive, self-contained HTML and
+# is the best-supported Sankey implementation in Python.
+plotly>=5.18
+
+# Optional: static export to SVG/PNG (for slides, LinkedIn, print). HTML output
+# works without this. Install if you need -f svg / -f png.
+kaleido>=0.2.1

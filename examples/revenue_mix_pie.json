@@ -1,0 +1,16 @@
+{
+  "chart_type": "pie",
+  "title": "Where Revenue Comes From",
+  "subtitle": "Share of ARR by customer segment, 2026",
+  "source": "Source: Fabricated sample data · claude-graphics-skill",
+  "theme": "editorial",
+  "donut": true,
+  "height": 640,
+  "width": 900,
+  "slices": [
+    { "label": "Enterprise", "value": 52 },
+    { "label": "Mid-market", "value": 31 },
+    { "label": "SMB", "value": 12 },
+    { "label": "Self-serve", "value": 5 }
+  ]
+}

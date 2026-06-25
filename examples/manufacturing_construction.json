@@ -1,0 +1,28 @@
+{
+  "chart_type": "bar",
+  "stacked": true,
+  "title": "Manufacturing Drove America's Construction Boom",
+  "subtitle": "Contribution to year-over-year growth in U.S. construction spending, by sector (%)",
+  "source": "Source: U.S. Census Bureau · Value of Construction Put in Place (via FRED), annual averages",
+  "footer": "More charts: simula.ad",
+  "wordmark": "SIMULA",
+  "theme": "editorial",
+  "value_format": ",.0f",
+  "value_suffix": "%",
+  "y_dtick": 5,
+  "bargap": 0.22,
+  "height": 1020,
+  "width": 1080,
+  "x": ["2013","2014","2015","2016","2017","2018","2019","2020","2021","2022","2023","2024","2025"],
+  "series": [
+    { "name": "Manufacturing",    "values": [1.26, 2.06, 5.28, -0.77, -1.8, 0.35, 1.63, -0.99, 1.15, 7.63, 11.83, 4.05, -1.78] },
+    { "name": "Power",            "values": [-1.68, 4.93, -1.72, -0.46, -1.09, 0.71, 3.45, 0.09, 0.17, 0.43, 4.49, 0.59, 0.29] },
+    { "name": "Commercial",       "values": [1.57, 2.41, 0.99, 2.48, 1.85, -0.21, -0.44, 0.97, 1.35, 6.06, 3.09, -2.31, -1.19] },
+    { "name": "Health Care",      "values": [-0.46, -0.52, 0.23, 0.17, 0.54, 0.07, 0.54, 0.4, 0.32, 1.39, 1.3, 0.28, 0.02] },
+    { "name": "Transportation",   "values": [0.49, 0.62, 0.74, -0.35, 0.55, 1.42, 0.81, 0.58, -0.27, 0.32, 0.63, 0.08, 0.32] },
+    { "name": "Education",        "values": [-1.44, 0.13, 1.25, 1.4, 1.06, 0.93, 1.44, 0.34, -1.68, 0.52, 2.84, 1.86, 0.04] },
+    { "name": "Lodging",          "values": [0.69, 0.84, 1.22, 1.08, 0.33, 0.56, 0.38, -0.88, -1.67, 0.2, 0.86, -0.18, -0.03] },
+    { "name": "Amusement & Rec.", "values": [-0.07, 0.38, 0.88, 0.66, 0.6, 0.29, 0.46, -0.38, -0.21, 0.79, 0.86, 0.45, 0.27] },
+    { "name": "Religious",        "values": [-0.06, -0.06, 0.05, 0.03, -0.03, -0.02, 0.04, -0.05, -0.06, 0.01, 0.11, 0.04, 0.08] }
+  ]
+}

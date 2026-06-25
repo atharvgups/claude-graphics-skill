@@ -1,0 +1,15 @@
+{
+  "chart_type": "box",
+  "title": "Response Times Vary by Plan Tier",
+  "subtitle": "Distribution of API latency (ms) over the last week",
+  "source": "Source: Fabricated sample data · claude-graphics-skill",
+  "theme": "editorial",
+  "value_suffix": " ms",
+  "height": 600,
+  "width": 980,
+  "groups": [
+    { "name": "Free", "values": [180, 220, 250, 310, 290, 410, 350, 280, 600, 240, 270, 330] },
+    { "name": "Pro", "values": [90, 110, 130, 120, 150, 100, 140, 160, 115, 125, 135, 200] },
+    { "name": "Enterprise", "values": [40, 55, 60, 50, 70, 45, 65, 58, 52, 48, 62, 80] }
+  ]
+}
