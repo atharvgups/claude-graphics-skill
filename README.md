@@ -99,6 +99,7 @@ claude-graphics-skill/
 ├── scripts/
 │   ├── render.py             # CLI: load spec → dispatch by chart_type → write file
 │   ├── build_gallery.py      # render every example → output/gallery.html contact sheet
+│   ├── qa_alignment.py       # regression gate: every headline sits at the canvas edge
 │   ├── theme.py              # palettes + themes + color helpers (the "designed" layer)
 │   └── charts/
 │       ├── __init__.py       # imports each chart module to register it
@@ -136,7 +137,9 @@ claude-graphics-skill/
 └── output/                   # generated graphics + gallery.html (gitignored)
 ```
 
-Run `python scripts/build_gallery.py` to see all 50 examples at once. Each
+Run `python scripts/build_gallery.py` to see all examples at once, and
+`python scripts/qa_alignment.py` to verify every headline sits flush at the
+canvas edge (a regression gate; exits non-zero if any title is indented). Each
 `examples/*.json` filename is descriptive (e.g. `category_growth_diverging.json`,
 `cloud_market_marimekko.json`, `latency_ridgeline.json`).
 

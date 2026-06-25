@@ -5,3 +5,8 @@ plotly>=5.18
 # Optional: static export to SVG/PNG (for slides, LinkedIn, print). HTML output
 # works without this. Install if you need -f svg / -f png.
 kaleido>=0.2.1
+
+# Optional: only for scripts/qa_alignment.py (pixel-measures headline alignment
+# as a regression gate). Not needed for rendering.
+Pillow>=10.0
+
