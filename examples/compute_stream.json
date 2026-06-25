@@ -1,0 +1,16 @@
+{
+  "chart_type": "stream",
+  "title": "The Compute Mix Keeps Shifting Toward Inference",
+  "subtitle": "Share of cluster GPU-hours by workload, 2019–2026",
+  "source": "Source: Fabricated sample data · claude-graphics-skill",
+  "theme": "editorial",
+  "height": 620,
+  "width": 1080,
+  "x": ["2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026"],
+  "series": [
+    { "name": "Training",    "values": [60, 78, 95, 110, 120, 130, 140, 150] },
+    { "name": "Fine-tuning", "values": [10, 16, 26, 40, 60, 85, 110, 140] },
+    { "name": "Inference",   "values": [20, 35, 60, 110, 190, 300, 440, 620] },
+    { "name": "Evaluation",  "values": [5, 8, 12, 18, 26, 36, 48, 62] }
+  ]
+}

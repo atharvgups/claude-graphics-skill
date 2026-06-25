@@ -32,6 +32,7 @@ from . import pyramid          # noqa: F401  (registers "pyramid")
 from . import choropleth       # noqa: F401  (registers "choropleth")
 from . import pictograph       # noqa: F401  (registers "pictograph")
 from . import beeswarm         # noqa: F401  (registers "beeswarm")
+from . import stream           # noqa: F401  (registers "stream")
 
 # Future chart types plug in the same way, e.g.:
 # from . import network  # noqa: F401

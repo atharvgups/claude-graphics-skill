@@ -49,7 +49,7 @@ Scores are honest a16z-fidelity (1–5). "done" = the PNG truly looks studio-mad
 | choropleth map | done (5) | datacenter_choropleth; US-states/world, sequential scale, cream borders |
 | population pyramid | done (5) | workforce_pyramid; mirrored bars, center divider, side headers |
 | connected/path scatter | done (5) | inflation_path_scatter; spline threads points in time order |
-| stream graph | todo | wiggle-stacked area |
+| stream graph | done (5) | compute_stream; centered baseline, spline bands |
 | ridgeline | todo | stacked density ridges |
 | beeswarm / strip | done (5) | deal_cycle_beeswarm; deterministic bin-packing, median ticks |
 | pictograph / isotype | done (5) | ai_adoption_pictograph; 10x10 waffle, largest-remainder counts |

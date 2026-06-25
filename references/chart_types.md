@@ -353,6 +353,18 @@ tangle.
   "stages": [ { "label": "Impressions", "value": 1200000 }, { "label": "Engaged", "value": 384000 } ] }
 ```
 
+## stream — stream graph (centered stacked area)
+
+Stacked area flowed around a centered baseline (ThemeRiver), so the composition
+reads as a river of bands over time — good when both the mix and the total shift.
+`x` + `series` (same shape as line/area). No y-axis (the height is relative).
+
+```jsonc
+{ "chart_type": "stream", "x": ["2019", "2020", "2021"],
+  "series": [ { "name": "Training", "values": [60, 78, 95] },
+              { "name": "Inference", "values": [20, 60, 190] } ] }
+```
+
 ## beeswarm — distribution dots by group
 
 Every observation as a dot, packed (value-binned, deterministic) to show a
