@@ -1,13 +1,18 @@
 """
 Line / area chart renderer — for trends over time or any ordered x.
 
-Handles the most common time-series shapes in one place:
-  * one or many series (each its own palette color),
-  * optional area fill (`fill`) and stacked area (`stacked`),
-  * optional markers,
-  * labeling either as a bottom legend (default, robust for many series) or as
-    direct end-of-line labels (`label_mode: "end"`) — the cleaner a16z look when
-    there are only a few series.
+Tuned to the a16z multi-line house style:
+  * **Maximally-separated colors** (`line_palette`) so adjacent lines never read
+    as the same hue, reinforced by a **dash-style cycle** (solid → dot → dash-dot
+    …) — a16z distinguishes series by color *and* dash, which also survives B&W.
+  * **Circle-dot legend** (not line swatches) for multi-series; a **single series
+    gets NO legend** — the title/subtitle carry it (a16z never legends one line).
+  * Optional **end-of-line value labels** (`end_values`) — the final number
+    printed at each line's right end in its color (a16z chart 6).
+  * Optional markers (`markers`) drawn with a paper-colored halo so dots sit
+    cleanly on the line.
+  * Area via `fill` (flat tint) or `stacked` (stacked area, dot legend + the
+    broad stack palette).
 
 Spec shape:
 
@@ -15,11 +20,14 @@ Spec shape:
       "chart_type": "line",
       "x": ["2019", "2020", "2021", ...],
       "series": [
-        { "name": "Technology", "values": [12, 18, 25, ...], "color": "#opt" },
+        { "name": "Technology", "values": [12, 18, 25, ...], "color": "#opt",
+          "dash": "solid|dot|dash|dashdot" },
         { "name": "Software",   "values": [ 8, 11, 19, ...] }
       ],
       "fill": false, "stacked": false, "markers": false,
-      "label_mode": "legend"        // "legend" | "end"
+      "dash_styles": true,            // cycle dash per series (auto when >1 line)
+      "end_values": false,            // label each line's final value at its end
+      "label_mode": "legend"          // "legend" | "end" (name labels at line end)
     }
 """
 
@@ -28,8 +36,12 @@ from __future__ import annotations
 import plotly.graph_objects as go
 
 from .base import (add_circle_legend, apply_footer, apply_titles,
-                   cartesian_axes, register, style_legend)
-from theme import color_for_index, hex_to_rgba
+                   cartesian_axes, format_value, register)
+from theme import hex_to_rgba
+
+# Dash cycle: the lead series stays solid (emphasis), the rest take distinct
+# patterns — matches how a16z separates overlapping lines.
+_DASHES = ["solid", "dot", "dashdot", "dash", "longdash", "longdashdot"]
 
 
 @register("line")
@@ -43,13 +55,17 @@ def render(spec: dict, theme: dict) -> go.Figure:
 
     fill = bool(spec.get("fill", False))
     stacked = bool(spec.get("stacked", False))
-    mode = "lines+markers" if spec.get("markers", False) else "lines"
+    markers = bool(spec.get("markers", False))
+    mode = "lines+markers" if markers else "lines"
     label_mode = spec.get("label_mode", "legend")
-    # Stacked areas read as categorical composition, so they use the broader
-    # 9-tone stack palette + a circle-dot legend (like the stacked bar). Plain
-    # lines keep their per-line palette color and native line swatch.
-    pal_stack = theme.get("stack_palette") or theme["palette"]
-    dot_legend = stacked and label_mode != "end"
+    end_values = bool(spec.get("end_values", False))
+    single = len(series) == 1
+
+    line_pal = theme.get("line_palette") or theme["palette"]
+    stack_pal = theme.get("stack_palette") or line_pal
+    # Dash variation is on by default for multiple plain lines; off for areas
+    # (the fill already separates them) and single series.
+    use_dash = spec.get("dash_styles", len(series) > 1 and not (stacked or fill))
 
     fig = go.Figure()
     colors, names = [], []
@@ -59,44 +75,59 @@ def render(spec: dict, theme: dict) -> go.Figure:
         if s.get("color"):
             c = s["color"]
         elif stacked:
-            c = pal_stack[i % len(pal_stack)]
+            c = stack_pal[i % len(stack_pal)]
         else:
-            c = color_for_index(theme, i)
+            c = line_pal[i % len(line_pal)]
         colors.append(c)
         names.append(s.get("name", f"Series {i + 1}"))
+        dash = s.get("dash") or (_DASHES[i % len(_DASHES)] if use_dash else "solid")
         trace = dict(
-            x=x, y=s["values"], name=names[-1],
-            mode=mode, line=dict(color=c, width=3),
-            marker=dict(color=c, size=7),
+            x=x, y=s["values"], name=names[-1], mode=mode,
+            line=dict(color=c, width=3, dash=dash),
+            marker=dict(color=c, size=8,
+                        line=dict(color=theme["paper_bg"], width=1.5)),
             hovertemplate="%{fullData.name}: %{y}<extra></extra>",
-            # Hide real traces from the legend when we draw circle dots instead.
-            showlegend=(label_mode == "legend" and not dot_legend),
+            showlegend=False,  # legend handled explicitly below
         )
         if stacked:
             trace["stackgroup"] = "one"
             trace["fillcolor"] = hex_to_rgba(c, 0.65)
+            trace["line"]["dash"] = "solid"
         elif fill:
             trace["fill"] = "tozeroy"
-            trace["fillcolor"] = hex_to_rgba(c, 0.18)
+            trace["fillcolor"] = hex_to_rgba(c, 0.16)
         fig.add_trace(go.Scatter(**trace))
 
-    if label_mode == "end":
-        # Direct labels at the end of each line — no legend, the editorial look.
+    # End-of-line labels are pinned to the plot's right edge in PAPER x (with the
+    # data y) — never x=x[-1], because referencing a categorical x value from an
+    # annotation coerces the whole x-axis to numeric and collapses the data.
+    def _end_label(y, text, color, size_bump=0, shift=10):
+        fig.add_annotation(
+            xref="paper", x=1.0, xshift=shift, yref="y", y=y,
+            text=text, xanchor="left", showarrow=False,
+            font=dict(family=theme["font_family"],
+                      size=theme["label_size"] + size_bump, color=color),
+        )
+
+    right, bottom = 36, 118
+    if label_mode == "end" and not single:
+        # Direct NAME labels at the end of each line — no legend.
         for i, s in enumerate(series):
-            fig.add_annotation(
-                x=x[-1], y=s["values"][-1], text=f"<b>{s.get('name', '')}</b>",
-                xanchor="left", xshift=10, showarrow=False,
-                font=dict(family=theme["font_family"],
-                          size=theme["label_size"], color=colors[i]),
-            )
-        fig.update_layout(showlegend=False)
-        right, bottom = 170, 70
-    elif dot_legend:
-        add_circle_legend(fig, names, colors, theme)
-        right, bottom = 36, 124
+            _end_label(s["values"][-1], f"<b>{names[i]}</b>", colors[i], shift=12)
+        right, bottom = 188, 84
+    elif single:
+        bottom = 96  # title carries it; no legend
     else:
-        style_legend(fig, theme)
-        right, bottom = 36, 118
+        add_circle_legend(fig, names, colors, theme)
+        bottom = 120
+
+    # End-of-line VALUE labels (a16z chart 6): bold final number in series color.
+    if end_values:
+        for i, s in enumerate(series):
+            _end_label(s["values"][-1],
+                       f"<b>{format_value(s['values'][-1], spec)}</b>",
+                       colors[i], size_bump=1)
+        right = max(right, 104)
 
     has_footer = bool(spec.get("footer") or spec.get("wordmark"))
     if has_footer:

@@ -1,0 +1,17 @@
+{
+  "chart_type": "line",
+  "title": "Machinery Construction Is Growing (But Tiny)",
+  "subtitle": "Private construction spending: Manufacturing machinery ($B)",
+  "source": "Source: Fabricated sample data · claude-graphics-skill",
+  "theme": "editorial",
+  "value_prefix": "$",
+  "value_suffix": "B",
+  "markers": true,
+  "end_values": true,
+  "height": 600,
+  "width": 1040,
+  "x": ["2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025"],
+  "series": [
+    { "name": "Machinery", "values": [1.5, 1.6, 1.5, 2.2, 1.7, 2.3, 3.0, 4.1] }
+  ]
+}

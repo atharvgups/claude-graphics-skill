@@ -2,17 +2,67 @@
   "chart_type": "line",
   "title": "The Premium Is Gone",
   "subtitle": "Forward P/E premium vs. the broad market, by sector",
-  "source": "Source: Fabricated sample data · claude-graphics-skill",
+  "source": "Source: Fabricated sample data \u00b7 claude-graphics-skill",
   "theme": "editorial",
   "value_suffix": "%",
   "label_mode": "legend",
   "markers": false,
   "height": 620,
   "width": 1060,
-  "x": ["2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026"],
+  "x": [
+    "2018",
+    "2019",
+    "2020",
+    "2021",
+    "2022",
+    "2023",
+    "2024",
+    "2025",
+    "2026"
+  ],
   "series": [
-    { "name": "Software", "values": [40, 65, 150, 120, 55, 35, 70, 95, 30] },
-    { "name": "Semiconductors", "values": [20, 30, 60, 80, 45, 50, 110, 130, 90] },
-    { "name": "Internet", "values": [30, 45, 95, 85, 40, 28, 48, 60, 38] }
-  ]
+    {
+      "name": "Software",
+      "values": [
+        40,
+        65,
+        150,
+        120,
+        55,
+        35,
+        70,
+        95,
+        30
+      ]
+    },
+    {
+      "name": "Semiconductors",
+      "values": [
+        20,
+        30,
+        60,
+        80,
+        45,
+        50,
+        110,
+        130,
+        90
+      ]
+    },
+    {
+      "name": "Internet",
+      "values": [
+        30,
+        45,
+        95,
+        85,
+        40,
+        28,
+        48,
+        60,
+        38
+      ]
+    }
+  ],
+  "end_values": true
 }

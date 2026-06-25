@@ -86,12 +86,18 @@ the full diverging-stacked + footer reference.
 
 ## line — line or area, multi-series
 
-`x` + `series`. `fill` → area; `stacked` → stacked area; `markers` → dots;
-`label_mode: "end"` labels line-ends instead of a legend.
+`x` + `series`. Lines get **maximally-separated colors** (`line_palette`) plus an
+auto **dash-style cycle** (solid → dot → dash-dot …) so series never blur — set a
+per-series `"dash"` or `"dash_styles": false` to override. `markers` → halo'd
+dots; `fill` → area tint; `stacked` → stacked area (dot legend). A **single
+series draws no legend** (the title carries it). `end_values: true` prints each
+line's final value at its right end in the series color (a16z signature);
+`label_mode: "end"` instead labels the series NAME at the end (no legend).
 
 ```jsonc
-{ "chart_type": "line", "fill": false, "label_mode": "legend", "x": ["2022", "2023"],
-  "series": [ { "name": "Software", "values": [55, 35] }, { "name": "Internet", "values": [40, 28] } ] }
+{ "chart_type": "line", "end_values": true, "x": ["2022", "2023", "2024"],
+  "series": [ { "name": "Software", "values": [55, 35, 70] },
+              { "name": "Internet", "values": [40, 28, 48], "dash": "dot" } ] }
 ```
 
 ## combo — dual-axis bar + line

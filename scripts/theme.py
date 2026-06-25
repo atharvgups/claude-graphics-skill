@@ -102,6 +102,13 @@ THEMES = {
             "#3B7A86", "#2E3826", "#7C89A6", "#A7C0D0", "#1F2A48",
             "#7D9A50", "#C77E92", "#AEC994", "#6F6E64",
         ],
+        # Line series need maximally-SEPARATED hues (adjacent lines must not read
+        # as the same color), unlike the analogous bar palette. Teal → ochre →
+        # navy → rust → sage → plum, the a16z multi-line scheme (chart 2/6).
+        "line_palette": [
+            "#3E7C73", "#C98A3C", "#3A5170", "#A8553A",
+            "#7C9A6B", "#6E6A8C", "#4E8378", "#9A8246",
+        ],
         "link_opacity": 0.42,
         "node_pad": 30,
         "node_thickness": 24,

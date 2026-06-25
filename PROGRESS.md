@@ -13,7 +13,8 @@ Scores are honest a16z-fidelity (1–5). "done" = the PNG truly looks studio-mad
 | bar — vertical | ai_spend_bar | done | 5 | callout + rule + rounded caps |
 | bar — diverging stacked | manufacturing_construction | done | 5 | matches a16z reference chart 4 |
 | bar — grouped/100% | venture_stacked_bar, channel_mix_percent_bar | todo | 4 | circle legend ok; verify vs a16z |
-| line — multi | valuation_line | todo | 3 | no markers/dash-styles; single-series shows legend |
+| line — multi | valuation_line | done | 5 | line_palette + dash cycle + circle legend + end-value labels |
+| line — single | machinery_line | done | 5 | no legend, halo markers, end-value label (fixed cat-axis collapse bug) |
 | area | (none yet) | todo | 3 | flat fill; need gradient + point markers + labels |
 | combo | inference_combo | todo | 3 | only 1 line; no markers; need 2-line + shapes |
 | scatter/bubble | spend_retention_scatter | todo | 3 | verify quadrant/label style |
@@ -59,3 +60,7 @@ Scores are honest a16z-fidelity (1–5). "done" = the PNG truly looks studio-mad
 
 ## Log
 - a59a7fa baseline import (all current work).
+- 3d23d83 a16z calibration notes + PROGRESS.
+- line: line_palette (separated hues), dash-style cycle, circle-dot legend,
+  single-series legend suppression, end-of-line VALUE labels, halo markers.
+  Fixed: end-label at x=x[-1] collapsed categorical x-axis → pin to paper x=1.0.
