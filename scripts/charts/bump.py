@@ -66,5 +66,5 @@ def render(spec: dict, theme: dict) -> go.Figure:
         height=spec.get("height", 600), width=spec.get("width", 1040),
         plot_bgcolor=theme["plot_bg"],
     )
-    apply_titles(fig, spec, theme)
+    apply_titles(fig, spec, theme, x_shift=-(50 - 28))  # headline to canvas edge
     return fig
