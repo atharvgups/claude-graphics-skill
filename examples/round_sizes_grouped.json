@@ -1,0 +1,16 @@
+{
+  "chart_type": "bar",
+  "x": ["Seed", "Series A", "Series B", "Series C", "Growth"],
+  "title": "Round Sizes Grew at Every Stage",
+  "subtitle": "Median round size by stage ($M), 2021 vs 2026",
+  "source": "Source: Fabricated sample data · claude-graphics-skill",
+  "theme": "editorial",
+  "value_prefix": "$",
+  "value_suffix": "M",
+  "height": 640,
+  "width": 1040,
+  "series": [
+    { "name": "2021", "values": [3.5, 12, 28, 55, 120] },
+    { "name": "2026", "values": [5.0, 18, 42, 88, 210] }
+  ]
+}
