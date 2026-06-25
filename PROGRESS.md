@@ -51,7 +51,7 @@ Scores are honest a16z-fidelity (1–5). "done" = the PNG truly looks studio-mad
 | connected/path scatter | done (5) | inflation_path_scatter; spline threads points in time order |
 | stream graph | todo | wiggle-stacked area |
 | ridgeline | todo | stacked density ridges |
-| beeswarm / strip | todo | distribution dots |
+| beeswarm / strip | done (5) | deal_cycle_beeswarm; deterministic bin-packing, median ticks |
 | pictograph / isotype | done (5) | ai_adoption_pictograph; 10x10 waffle, largest-remainder counts |
 | annotated time series | done (5) | dau_annotated_line; events:[] dotted markers + top labels |
 

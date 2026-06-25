@@ -353,6 +353,18 @@ tangle.
   "stages": [ { "label": "Impressions", "value": 1200000 }, { "label": "Engaged", "value": 384000 } ] }
 ```
 
+## beeswarm — distribution dots by group
+
+Every observation as a dot, packed (value-binned, deterministic) to show a
+group's distribution without hiding the points. `groups` each `{ name, values }`;
+`show_median` draws a per-group median tick; `y_title` labels the axis.
+
+```jsonc
+{ "chart_type": "beeswarm", "y_title": "Days to close", "show_median": true,
+  "groups": [ { "name": "SMB", "values": [21, 28, 33, ...] },
+              { "name": "Enterprise", "values": [88, 120, 175, ...] } ] }
+```
+
 ## pictograph — waffle / isotype ("X out of 100")
 
 A grid of squares, each a unit of the whole, filled proportionally by category —
