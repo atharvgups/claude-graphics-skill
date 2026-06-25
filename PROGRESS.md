@@ -62,6 +62,12 @@ Scores are honest a16z-fidelity (1–5). "done" = the PNG truly looks studio-mad
   labels, end-of-line VALUE labels, single-series legend suppression.
 - Stacked bar: per-x outline highlight; two-line x-axis labels.
 
+## STATUS: Phase 1 + Phase 2 COMPLETE
+30 registered chart types, all scoring 5; 45 examples; gallery renders clean;
+docs (SKILL/README/chart_types) in sync; ~/Downloads/graphics.skill rebuilt
+(115KB, no junk). Local commits only on `a16z-charts-expansion` — never pushed.
+Remaining: optional second-pass polish + extra examples per type.
+
 ## Log
 - a59a7fa baseline import (all current work).
 - 3d23d83 a16z calibration notes + PROGRESS.
