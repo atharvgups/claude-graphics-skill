@@ -221,12 +221,15 @@ def _render_horizontal(spec, theme, bars, labels, values):
         # Show the unit only on the first (top) row — once is enough; repeating it
         # on every bar is clutter. The subtitle already carries the full unit.
         show_unit = unit and i == 0
+        main = f"<b>{num}</b>"
         if show_unit:
-            value_texts.append(
-                f"<b>{num}</b>"
-                f"<span style='font-size:0.78em'> {unit}</span>")
-        else:
-            value_texts.append(f"<b>{num}</b>")
+            main += f"<span style='font-size:0.78em'> {unit}</span>"
+        # Optional per-bar secondary figure beneath the headline value (a16z
+        # "Spirited Away" dual label, e.g. a contribution "+6.63 pp").
+        if b.get("sub") is not None:
+            main += (f"<br><span style='font-size:0.72em;color:"
+                     f"{hex_to_rgba(theme['font_color'], 0.6)}'>{b['sub']}</span>")
+        value_texts.append(main)
         label_colors.append(title_c if on else hex_to_rgba(theme["font_color"], 0.55))
 
         lab = labels[i]

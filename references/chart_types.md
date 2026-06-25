@@ -52,7 +52,10 @@ default** when the data has a clear takeaway; set `"note": false` to suppress it
 **Diverging horizontal ranking** (a16z "Spirited Away"): a horizontal `bar` whose
 `value`s include negatives renders diverging from a central zero line — positives
 run right (accent), negatives run left (rust) — auto-detected (or force with
-`"diverging": true`). Sort the bars by value for the cleanest read.
+`"diverging": true`). Sort the bars by value for the cleanest read. Add a per-bar
+`"sub"` string for a16z's **dual label** — a smaller secondary figure (e.g. a
+contribution `"+6.6 pp"`) beneath the headline value. Negative columns also work
+on a **vertical** bar (rust + zero divider).
 
 ```jsonc
 { "chart_type": "bar", "orientation": "h", "value_suffix": "%",
