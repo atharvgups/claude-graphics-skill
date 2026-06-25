@@ -41,13 +41,15 @@ python scripts/render.py SPEC.json [options]
   --png-scale N         PNG resolution multiplier (default 2 = retina)
 ```
 
-**Chart types** (set via `chart_type`) — **23 in all**: `bar`
-(single/grouped/stacked/100%, v or h), `line` (line/area), `combo` (dual-axis
-bar+line), `scatter`/bubble, `pie`/donut, `waterfall`, `dot` (lollipop/dumbbell),
-`heatmap`, `treemap`, `sunburst`, `small_multiples`, `histogram`, `box`/violin,
-`radar`, `slope`, `bump`, `candlestick`, `table`, `bignumber` (KPI), `gauge`,
-`bullet`, `sankey`, `funnel`. Full field spec in
-[`references/chart_types.md`](references/chart_types.md). Run
+**Chart types** (set via `chart_type`) — **30 in all**: `bar`
+(single/grouped/stacked/100%/diverging, v or h), `line` (line/area/annotated),
+`combo` (dual-axis bar + multi-line), `scatter`/bubble (+ trendline, 2×2 quadrant,
+connected path), `pie`/donut, `waterfall`, `dot` (lollipop/dumbbell), `heatmap`,
+`treemap`, `sunburst`, `small_multiples`, `histogram`, `box`/violin, `radar`,
+`slope`, `bump`, `candlestick`, `table`, `bignumber` (KPI), `gauge`, `bullet`,
+`sankey`, `funnel`, `marimekko` (mosaic), `pyramid` (population), `choropleth`
+(map), `pictograph` (waffle), `beeswarm`, `stream` (ThemeRiver), `ridgeline`.
+Full field spec in [`references/chart_types.md`](references/chart_types.md). Run
 `python scripts/build_gallery.py` to render a contact sheet of every example.
 
 **Themes:** `midnight` (dark, high-impact — default), `simula` (dark, on-brand

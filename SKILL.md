@@ -45,13 +45,16 @@ python scripts/render.py SPEC.json [-o OUT] [-f html|svg|png] [-t THEME]
 - **HTML** (default) is interactive (hover, drag) and fully self-contained — it
   renders as an artifact with no network access. Prefer it.
 - **SVG / PNG** are static exports for slides/print/LinkedIn (need `kaleido`).
-- **Chart types** (`chart_type` field) — one spec format, **23 chart types**:
-  `bar` (single/grouped/stacked/100%, v or h), `line` (multi-series, line/area),
-  `combo` (dual-axis bar+line), `scatter`/bubble, `pie`/donut, `waterfall`,
-  `dot` (lollipop/dumbbell), `heatmap`, `treemap`, `sunburst`, `small_multiples`,
-  `histogram`, `box`/violin, `radar`, `slope`, `bump`, `candlestick`, `table`,
-  `bignumber` (KPI), `gauge`, `bullet`, `sankey`, `funnel`. Full field spec for
-  each in `references/chart_types.md`; the selection guide below maps data → type.
+- **Chart types** (`chart_type` field) — one spec format, **30 chart types**:
+  `bar` (single/grouped/stacked/100%/**diverging**, v or h), `line` (multi-series,
+  line/area, **annotated** via `events`), `combo` (dual-axis bar + multi-line),
+  `scatter`/bubble (+ **trendline**, **2×2 quadrant**, **connected/path**),
+  `pie`/donut, `waterfall`, `dot` (lollipop/dumbbell), `heatmap`, `treemap`,
+  `sunburst`, `small_multiples`, `histogram`, `box`/violin, `radar`, `slope`,
+  `bump`, `candlestick`, `table`, `bignumber` (KPI), `gauge`, `bullet`, `sankey`,
+  `funnel`, `marimekko` (mosaic), `pyramid` (population), `choropleth` (map),
+  `pictograph` (waffle), `beeswarm`, `stream` (ThemeRiver), `ridgeline`. Full
+  field spec for each in `references/chart_types.md`; the guide below maps data → type.
 - **Themes**: `editorial` (**the default** — the a16z / Jason Saltzman press
   style: warm paper canvas, deep-navy serif headline, tight earthy palette; this
   is the consistent house aesthetic and what you should use unless asked
@@ -236,6 +239,12 @@ Two things to know:
      *several actuals vs targets* → `bullet`.
    - *Price/OHLC over time* → `candlestick`. *The data itself is the story* → `table`.
    - *Flow / splitting between things* → `sankey`. *Conversion stages* → `funnel`.
+   - *+/− contributions ranked* → diverging `bar` (`orientation:"h"`, mixed signs).
+   - *Two dims: category size × its mix* → `marimekko`. *Cohort split by group* → `pyramid`.
+   - *Values across a map* → `choropleth`. *Share as "X of 100"* → `pictograph`.
+   - *Every observation in a distribution* → `beeswarm`; *many distributions* → `ridgeline`.
+   - *Composition flowing over time* → `stream`. *Positioning in 2 dims* → `scatter` + `quadrants`.
+   - *A path through 2 dims over time* → `scatter` + `connect`. *Events on a trend* → `line` + `events`.
 
    When two types fit, prefer the simpler/harder-to-misread one (bar over pie,
    bar over sankey, dot over bar for sparse rankings).
@@ -269,7 +278,7 @@ the data. To eyeball the whole library at once, run
 `python scripts/build_gallery.py` → opens `output/gallery.html`.
 
 Every editorial example shares the identical a16z aesthetic — that consistency
-across all 23 chart types is the point.
+across all 30 chart types is the point.
 
 ## Extending to new chart types
 
