@@ -26,10 +26,10 @@ Scores are honest a16z-fidelity (1–5). "done" = the PNG truly looks studio-mad
 | sunburst | spend_sunburst | done | 5 | verified: nested hierarchy, labeled segments |
 | small_multiples | regions_small_multiples | done | 5 | verified: shared-scale 2x3 grid, clean |
 | histogram | deal_size_histogram | done | 5 | verified: clean distribution, axis titles |
-| box/violin | latency_box | todo | 3 | verify |
-| radar | product_radar | todo | 3 | verify |
-| slope | margin_slope | todo | 3 | verify |
-| bump | model_bump | todo | 3 | verify |
+| box/violin | latency_box | done | 5 | verified: median+mean, distinct colors, clean |
+| radar | product_radar | done | 5 | verified: two filled polygons, dot legend |
+| slope | margin_slope | done | 5 | verified: risers teal / fallers rust, dual labels |
+| bump | model_bump | done | 5 | verified: smooth rank ribbons, right-edge labels |
 | candlestick | price_candlestick | todo | 3 | verify |
 | table | startups_table | todo | 3 | verify |
 | bignumber | kpi_bignumber | todo | 4 | verify |
