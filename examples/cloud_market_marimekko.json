@@ -1,0 +1,23 @@
+{
+  "chart_type": "marimekko",
+  "title": "The Cloud Market, and Who Owns It",
+  "subtitle": "Segment size (column width) and provider share within each (2026)",
+  "source": "Source: Fabricated sample data · claude-graphics-skill",
+  "theme": "editorial",
+  "value_suffix": "%",
+  "height": 700,
+  "width": 1100,
+  "categories": [
+    { "name": "Compute", "total": 420 },
+    { "name": "Storage", "total": 240 },
+    { "name": "Databases", "total": 180 },
+    { "name": "AI / ML", "total": 160 },
+    { "name": "Networking", "total": 90 }
+  ],
+  "segments": [
+    { "name": "AWS",    "values": [42, 38, 33, 30, 45] },
+    { "name": "Azure",  "values": [28, 30, 32, 26, 25] },
+    { "name": "Google", "values": [18, 17, 20, 34, 16] },
+    { "name": "Other",  "values": [12, 15, 15, 10, 14] }
+  ]
+}

@@ -350,3 +350,16 @@ tangle.
 { "chart_type": "funnel",
   "stages": [ { "label": "Impressions", "value": 1200000 }, { "label": "Engaged", "value": 384000 } ] }
 ```
+
+## marimekko — variable-width 100%-stacked columns (mosaic)
+
+Two dimensions at once: each column's **width** is its `categories[].total` (e.g.
+market size); the **segments** are its composition (normalized to 100%). Category
+name + width-share label on top; in-cell % with auto-contrast text; dot legend.
+If a category omits `total`, its width is the sum of its segment values.
+
+```jsonc
+{ "chart_type": "marimekko", "value_suffix": "%",
+  "categories": [ { "name": "Compute", "total": 420 }, { "name": "Storage", "total": 240 } ],
+  "segments": [ { "name": "AWS", "values": [42, 38] }, { "name": "Azure", "values": [28, 30] } ] }
+```

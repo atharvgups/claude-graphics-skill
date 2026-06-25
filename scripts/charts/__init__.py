@@ -27,6 +27,7 @@ from . import candlestick      # noqa: F401  (registers "candlestick")
 from . import table            # noqa: F401  (registers "table")
 from . import hierarchy        # noqa: F401  (registers "sunburst")
 from . import indicator        # noqa: F401  (registers "bignumber" + "gauge" + "bullet")
+from . import marimekko        # noqa: F401  (registers "marimekko")
 
 # Future chart types plug in the same way, e.g.:
 # from . import network  # noqa: F401
