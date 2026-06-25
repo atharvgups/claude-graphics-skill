@@ -1,0 +1,13 @@
+{
+  "chart_type": "choropleth",
+  "scope": "usa",
+  "title": "Where the Data Centers Cluster",
+  "subtitle": "Operational data-center capacity by state (MW)",
+  "source": "Source: Fabricated sample data · claude-graphics-skill",
+  "theme": "editorial",
+  "value_suffix": " MW",
+  "height": 640,
+  "width": 1040,
+  "locations": ["VA", "TX", "CA", "AZ", "IL", "OH", "GA", "OR", "WA", "NV", "NY", "IA", "UT", "NC", "CO", "FL", "PA", "NE", "TN", "WI"],
+  "z": [3400, 1850, 1620, 1280, 1100, 980, 910, 760, 720, 690, 540, 510, 470, 430, 400, 360, 340, 300, 280, 210]
+}

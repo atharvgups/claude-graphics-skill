@@ -46,7 +46,7 @@ Scores are honest a16z-fidelity (1–5). "done" = the PNG truly looks studio-mad
 | diverging horizontal bar | done (5) | category_growth_diverging; teal-right/rust-left from central zero, callout |
 | marimekko / mosaic | done (5) | cloud_market_marimekko; width=size, stacks=share, auto-contrast labels |
 | 2×2 quadrant scatter | done (5) | positioning_quadrant; dotted dividers + corner labels, gridless |
-| choropleth map | todo | US/world |
+| choropleth map | done (5) | datacenter_choropleth; US-states/world, sequential scale, cream borders |
 | population pyramid | done (5) | workforce_pyramid; mirrored bars, center divider, side headers |
 | connected/path scatter | done (5) | inflation_path_scatter; spline threads points in time order |
 | stream graph | todo | wiggle-stacked area |

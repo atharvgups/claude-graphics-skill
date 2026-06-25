@@ -353,6 +353,18 @@ tangle.
   "stages": [ { "label": "Impressions", "value": 1200000 }, { "label": "Engaged", "value": 384000 } ] }
 ```
 
+## choropleth — shaded map (US states or world)
+
+Built-in geometries, no GeoJSON. `scope: "usa"` → two-letter state codes;
+`scope: "world"` → country names (or `"locationmode": "ISO-3"`). Sequential
+canvas→accent scale, cream borders, no frame/coastline chrome. `zmin`/`zmax`
+optional.
+
+```jsonc
+{ "chart_type": "choropleth", "scope": "usa", "value_suffix": " MW",
+  "locations": ["VA", "TX", "CA"], "z": [3400, 1850, 1620] }
+```
+
 ## pyramid — population pyramid (mirrored cohorts)
 
 Two series mirrored around a center axis: `left` extends left, `right` extends
