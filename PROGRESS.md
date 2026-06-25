@@ -68,10 +68,16 @@ Scores are honest a16z-fidelity (1–5). "done" = the PNG truly looks studio-mad
 30 registered chart types, all scoring 5; 45 examples; gallery renders clean;
 docs (SKILL/README/chart_types) in sync; ~/Downloads/graphics.skill rebuilt
 (115KB, no junk). Local commits only on `a16z-charts-expansion` — never pushed.
-Second pass done: vertical-diverging fix; verified grouped bars, long-label
-auto-margin, and dark-theme (simula) robustness of all new furniture (dot legend,
-footer + crosshatch, zero line, diverging). Added grouped + long-label + vertical-
-diverging examples. 47 examples total.
+Second pass (robustness + fidelity, all committed):
+- vertical-diverging bars: rust negatives, zero divider, labels clear the x-axis
+- dual-label diverging bar: per-bar `sub` = a16z chart 7 contribution pp
+- footer universal across single-series bars (alignment-aware apply_footer)
+- long titles/subtitles now wrap to a 2nd line instead of overflowing
+- verified: grouped bars, long category labels, lollipop dot, dark-theme (simula)
+- README fully synced (architecture tree → all 29 modules + 50 examples)
+- new examples: index_yoy_diverging, category_growth_diverging (dual-label),
+  round_sizes_grouped, eng_time_bar, context_window_lollipop, simula_models_bar
+50 examples total; gallery renders all 50 clean; package rebuilt (120K).
 
 ## Log
 - a59a7fa baseline import (all current work).
