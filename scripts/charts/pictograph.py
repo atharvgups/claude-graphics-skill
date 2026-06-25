@@ -17,7 +17,8 @@ from __future__ import annotations
 
 import plotly.graph_objects as go
 
-from .base import add_circle_legend, apply_titles, format_value, register
+from .base import (add_circle_legend, apply_titles, edge_align, format_value,
+                   register)
 
 
 @register("pictograph")
@@ -69,5 +70,7 @@ def render(spec: dict, theme: dict) -> go.Figure:
         height=spec.get("height", 660), width=spec.get("width", 760),
         plot_bgcolor=theme["plot_bg"],
     )
-    apply_titles(fig, spec, theme)
+    al = edge_align(spec.get("width", 760), 40, 40, 28)
+    fig.update_layout(legend=dict(x=al["legend_x"]))
+    apply_titles(fig, spec, theme, x_shift=al["x_shift"])
     return fig

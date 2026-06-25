@@ -16,8 +16,8 @@ from __future__ import annotations
 
 import plotly.graph_objects as go
 
-from .base import (add_circle_legend, apply_footer, apply_titles, format_value,
-                   register)
+from .base import (add_circle_legend, apply_footer, apply_titles, edge_align,
+                   format_value, register)
 from theme import hex_to_rgba
 
 
@@ -86,9 +86,11 @@ def render(spec: dict, theme: dict) -> go.Figure:
         height=spec.get("height", 660), width=spec.get("width", 1020),
         margin=dict(t=140, l=86, r=40, b=300 if has_footer else 96),
     )
+    al = edge_align(spec.get("width", 1020), 86, 40, 28)
     if has_footer:
-        apply_titles(fig, {**spec, "source": ""}, theme)
-        apply_footer(fig, spec, theme)
+        apply_titles(fig, {**spec, "source": ""}, theme, x_shift=al["x_shift"])
+        apply_footer(fig, spec, theme, x_shift=al["x_shift"],
+                     rule_x=al["rule_x"], wordmark_xshift=al["wordmark_xshift"])
     else:
-        apply_titles(fig, spec, theme)
+        apply_titles(fig, spec, theme, x_shift=al["x_shift"])
     return fig

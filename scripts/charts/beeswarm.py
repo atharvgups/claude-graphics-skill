@@ -81,5 +81,5 @@ def render(spec: dict, theme: dict) -> go.Figure:
         margin=dict(t=120, l=72, r=40, b=80),
         height=spec.get("height", 640), width=spec.get("width", 1020),
     )
-    apply_titles(fig, spec, theme)
+    apply_titles(fig, spec, theme, x_shift=-(72 - 28))  # headline to canvas edge
     return fig
