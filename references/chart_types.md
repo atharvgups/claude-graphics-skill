@@ -353,6 +353,18 @@ tangle.
   "stages": [ { "label": "Impressions", "value": 1200000 }, { "label": "Engaged", "value": 384000 } ] }
 ```
 
+## pyramid — population pyramid (mirrored cohorts)
+
+Two series mirrored around a center axis: `left` extends left, `right` extends
+right, by `groups` (cohorts, bottom→top). Center divider, side-name headers,
+absolute-magnitude x ticks, value labels at bar ends.
+
+```jsonc
+{ "chart_type": "pyramid", "groups": ["Junior", "Mid", "Senior"],
+  "left":  { "name": "Product", "values": [120, 95, 60] },
+  "right": { "name": "Platform", "values": [80, 78, 52] } }
+```
+
 ## marimekko — variable-width 100%-stacked columns (mosaic)
 
 Two dimensions at once: each column's **width** is its `categories[].total` (e.g.
