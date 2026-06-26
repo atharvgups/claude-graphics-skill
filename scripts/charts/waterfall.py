@@ -50,9 +50,9 @@ def render(spec: dict, theme: dict) -> go.Figure:
 
     inc = color_for_index(theme, 0)   # gains
     dec = color_for_index(theme, 4)   # losses
-    # Totals anchor the bridge, so they take the theme's anchor color (deep navy
-    # in editorial) rather than another palette hue that competes with gains/
-    # losses. Falls back to the 2nd palette entry on themes without an anchor.
+    # Totals anchor the bridge, so they take the theme's calm earthy anchor color
+    # rather than another palette hue that competes with gains/losses. Falls back
+    # to the 2nd palette entry on themes without an anchor.
     tot = theme.get("total_color") or color_for_index(theme, 1)   # totals / resets
 
     fig = go.Figure(go.Waterfall(
@@ -60,8 +60,10 @@ def render(spec: dict, theme: dict) -> go.Figure:
         text=[f"<b>{t}</b>" for t in text], textposition="outside",
         textfont=dict(family=theme["font_family"], size=theme["label_size"],
                       color=theme["font_color"]),
-        connector=dict(line=dict(color=hex_to_rgba(theme["font_color"], 0.25),
-                                 width=1)),
+        # Stronger connectors so the eye can follow the running total step to step
+        # — the faint default made the floating bars read as disconnected.
+        connector=dict(line=dict(color=hex_to_rgba(theme["font_color"], 0.5),
+                                 width=1.5, dash="dot")),
         increasing=dict(marker=dict(color=inc)),
         decreasing=dict(marker=dict(color=dec)),
         totals=dict(marker=dict(color=tot)),

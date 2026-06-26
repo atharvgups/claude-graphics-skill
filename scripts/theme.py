@@ -114,9 +114,11 @@ THEMES = {
         "title_color": "#1E2A44",
         "subtitle_color": "#6E6A5F",
         "source_color": "#A29D8E",
-        # Anchor color for waterfall totals / reference baselines — the deep navy
-        # reads as "this is the total", distinct from teal gains and rust losses.
-        "total_color": "#1E2A44",
+        # Anchor color for waterfall totals / reference baselines — a warm, earthy
+        # taupe that reads as a calm "this is the total" without the heaviness of
+        # navy, staying in the soft editorial family next to teal gains / rust
+        # losses (which it's deliberately distinct from).
+        "total_color": "#9E927A",
         "palette": PALETTES["editorial"],
         # Broader 9-tone palette for multi-category stacks (the tight 8-tone
         # `palette` is analogous-by-design and muddies when 6+ segments stack).
