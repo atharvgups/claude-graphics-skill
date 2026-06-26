@@ -44,6 +44,37 @@ from theme import hex_to_rgba
 _DASHES = ["solid", "dot", "dashdot", "dash", "longdash", "longdashdot"]
 
 
+def _deconflict(ys, plot_px, y_lo, y_hi, min_gap):
+    """Pixel yshifts (positive = up) so end-of-line labels stay >= min_gap apart.
+
+    Each label keeps its true data-y anchor; only the rendered text is nudged, so
+    a label still reads against its line. When several series finish at close
+    values their labels would otherwise stack on top of each other — a16z nudges
+    them apart. Greedy push-up, then slide the cluster down if it overran the top.
+    Returns all-zero shifts when nothing collides or the range is degenerate.
+    """
+    n = len(ys)
+    if n < 2 or y_hi <= y_lo or plot_px <= 0:
+        return [0.0] * n
+    scale = plot_px / (y_hi - y_lo)             # px per data unit
+    base = [(y - y_lo) * scale for y in ys]     # px up from the plot bottom
+    order = sorted(range(n), key=lambda i: base[i])
+    adj = base[:]
+    for k in range(1, n):                       # push each up off the one below
+        cur, prv = order[k], order[k - 1]
+        if adj[cur] - adj[prv] < min_gap:
+            adj[cur] = adj[prv] + min_gap
+    overflow = adj[order[-1]] - plot_px         # ran past the top? slide down
+    if overflow > 0:
+        for i in range(n):
+            adj[i] -= overflow
+        for k in range(n - 2, -1, -1):          # re-resolve bottom collisions
+            cur, nxt = order[k], order[k + 1]
+            if adj[nxt] - adj[cur] < min_gap:
+                adj[cur] = adj[nxt] - min_gap
+    return [adj[i] - base[i] for i in range(n)]
+
+
 @register("line")
 def render(spec: dict, theme: dict) -> go.Figure:
     x = spec.get("x") or []
@@ -111,19 +142,23 @@ def render(spec: dict, theme: dict) -> go.Figure:
     # End-of-line labels are pinned to the plot's right edge in PAPER x (with the
     # data y) — never x=x[-1], because referencing a categorical x value from an
     # annotation coerces the whole x-axis to numeric and collapses the data.
-    def _end_label(y, text, color, size_bump=0, shift=10):
+    def _end_label(y, text, color, size_bump=0, shift=10, yshift=0):
         fig.add_annotation(
-            xref="paper", x=1.0, xshift=shift, yref="y", y=y,
+            xref="paper", x=1.0, xshift=shift, yref="y", y=y, yshift=yshift,
             text=text, xanchor="left", showarrow=False,
             font=dict(family=theme["font_family"],
                       size=theme["label_size"] + size_bump, color=color),
         )
 
+    # End labels are collected, then de-conflicted + emitted once the final plot
+    # height is known (after the footer margin is settled, below).
+    end_labels = []
     right, bottom = 36, 118
     if label_mode == "end" and not single:
         # Direct NAME labels at the end of each line — no legend.
         for i, s in enumerate(series):
-            _end_label(s["values"][-1], f"<b>{names[i]}</b>", colors[i], shift=12)
+            end_labels.append(dict(y=s["values"][-1], text=f"<b>{names[i]}</b>",
+                                   color=colors[i], shift=12, size_bump=0))
         right, bottom = 188, 84
     elif single:
         bottom = 96  # title carries it; no legend
@@ -134,9 +169,10 @@ def render(spec: dict, theme: dict) -> go.Figure:
     # End-of-line VALUE labels (a16z chart 6): bold final number in series color.
     if end_values:
         for i, s in enumerate(series):
-            _end_label(s["values"][-1],
-                       f"<b>{format_value(s['values'][-1], spec)}</b>",
-                       colors[i], size_bump=1)
+            end_labels.append(dict(
+                y=s["values"][-1],
+                text=f"<b>{format_value(s['values'][-1], spec)}</b>",
+                color=colors[i], shift=10, size_bump=1))
         right = max(right, 104)
 
     # Per-point VALUE labels (a16z chart 8): bold value above each marker.
@@ -198,6 +234,19 @@ def render(spec: dict, theme: dict) -> go.Figure:
     has_footer = bool(spec.get("footer") or spec.get("wordmark"))
     if has_footer:
         bottom = max(bottom, 226)
+
+    # Now that the plot height is final, place the collected end labels with
+    # vertical de-confliction (series finishing at close values won't overlap).
+    if end_labels:
+        all_vals = [v for s in series for v in s["values"]]
+        y_lo, y_hi = min(all_vals), max(all_vals)
+        pad = (y_hi - y_lo) * 0.06 or 1.0       # ~Plotly's autorange padding
+        plot_px = spec.get("height", 620) - 120 - bottom
+        shifts = _deconflict([e["y"] for e in end_labels], plot_px,
+                             y_lo - pad, y_hi + pad, theme["label_size"] + 10)
+        for e, dy in zip(end_labels, shifts):
+            _end_label(e["y"], e["text"], e["color"],
+                       size_bump=e["size_bump"], shift=e["shift"], yshift=dy)
 
     cartesian_axes(fig, theme, spec, x_grid=False, y_grid=True)
     # Force a categorical x-axis when labels are strings: it keeps even spacing
