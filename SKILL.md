@@ -1,17 +1,21 @@
 ---
 name: graphics
 description: >-
-  Generate polished, presentation-ready data visualizations from structured
-  data — Sankey diagrams are the flagship, with a modular engine built to grow
-  into flow charts, funnels, network diagrams, and more. Use this skill whenever
-  the user wants a Sankey diagram, a flow/flow-of-value visualization, a "where
-  does the money/energy/traffic go" breakdown, a conversion or funnel graphic, or
-  more generally says things like "turn this data into a graphic", "make this
-  look good for a deck/LinkedIn post", "visualize this flow", or "diagram how X
-  moves through Y". Trigger it even when the user doesn't say the word "Sankey" —
-  if they describe quantities flowing between stages, sources, or categories, this
-  is the skill. Produces interactive, self-contained HTML (and optional SVG/PNG)
-  with designed defaults so output looks finished without manual tweaking.
+  Turn data into polished, presentation-ready charts in a consistent editorial
+  (a16z / Jason Saltzman) house style. Use this skill for ANY chart, graph, or
+  data graphic — bar (vertical/horizontal/grouped/stacked/100%/diverging), line,
+  area, combo (bar+line), scatter/bubble, quadrant, pie/donut, waterfall, dot
+  (lollipop/dumbbell), heatmap, treemap, sunburst, marimekko, histogram, box,
+  violin, beeswarm, ridgeline, radar, slope, bump, stream, candlestick, table,
+  KPI/big-number, gauge, bullet, choropleth map, population pyramid, pictograph,
+  sankey, and funnel. Trigger it whenever the user wants to "make/build/create a
+  chart or graph", "visualize/plot/graph this data", "turn this into a
+  graphic/infographic", "chart these numbers", "make this look good for a
+  deck/LinkedIn/report", or names any specific chart type — even from a vague ask
+  like "show this data nicely" or a pasted table/CSV. Also covers flow/where-does-
+  it-go breakdowns (sankey) and conversion funnels. Produces interactive,
+  self-contained HTML (and optional SVG/PNG) with designed defaults so output
+  looks finished without manual tweaking.
 ---
 
 # Graphics — Presentation-Ready Data Visualizations
