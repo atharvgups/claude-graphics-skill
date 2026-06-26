@@ -21,22 +21,25 @@ description: >-
 # Graphics — Presentation-Ready Data Visualizations
 
 This skill turns structured data into **designed** graphics — the kind that look
-at home in a board deck or a viral LinkedIn post, not a default chart export. The
-flagship is the **Sankey diagram** (flows of value/money/energy/users between
-nodes), and the engine is modular so new chart types drop in without touching the
-pipeline.
+at home in a board deck or a viral LinkedIn post, not a default chart export. It
+covers **30 chart types** behind one JSON spec, all rendered in a consistent
+editorial (a16z / Jason Saltzman) house style so a whole set of charts reads as
+if one studio made them. The engine is modular, so new chart types drop in
+without touching the pipeline.
 
 ## When to use this
 
-Reach for this skill when the user wants a *finished visual*, especially:
+Reach for this skill whenever the user wants a *finished visual* from data:
 
-- **Sankey / flow diagrams** — budgets, energy, traffic, headcount, conversions.
-- **"Make this data into a graphic"** — they have numbers and want something
-  shareable and polished.
-- **Funnels / breakdowns** — where quantities split or merge across stages.
+- **Any chart or graph** — "make/build/create a chart", "visualize/plot this",
+  "chart these numbers", or naming a specific type (bar, line, scatter, …).
+- **"Make this data into a graphic"** — they have numbers (or a pasted table/CSV)
+  and want something shareable and polished.
+- **Flows & funnels** — a Sankey for quantities *moving between* things
+  (sources → uses, stages → outcomes); a funnel for conversion drop-off.
 
-If the user describes quantities *moving between* things (sources → uses, stages
-→ outcomes), default to a Sankey.
+Default to the `editorial` theme and let the data shape pick the chart type (the
+data → type guide is below).
 
 ## How it works
 
