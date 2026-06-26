@@ -38,7 +38,7 @@ from __future__ import annotations
 
 import plotly.graph_objects as go
 
-from .base import (add_circle_legend, apply_footer, apply_titles,
+from .base import (_compact, add_circle_legend, apply_footer, apply_titles,
                    cartesian_axes, edge_align, format_value, register)
 from theme import hex_to_rgba
 
@@ -171,10 +171,14 @@ def _split_value(value, spec):
     prefix = spec.get("value_prefix", "")
     suffix = spec.get("value_suffix", "")
     neg = isinstance(value, (int, float)) and value < 0 and prefix
-    try:
-        body = format(abs(value) if neg else value, fmt)
-    except (ValueError, TypeError):
-        body = str(value)
+    v = abs(value) if neg else value
+    if fmt in ("compact", "si") and isinstance(value, (int, float)):
+        body = _compact(v)
+    else:
+        try:
+            body = format(v, fmt)
+        except (ValueError, TypeError):
+            body = str(value)
     return f"{'-' if neg else ''}{prefix}{body}", suffix.strip()
 
 

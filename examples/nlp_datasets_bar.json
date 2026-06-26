@@ -1,0 +1,21 @@
+{
+  "chart_type": "bar",
+  "title": "The NLP Datasets Everyone Trains On",
+  "subtitle": "Training examples per classic Hugging Face dataset",
+  "source": "Source: Hugging Face Hub (huggingface/datasets) · sizes as commonly cited",
+  "theme": "editorial",
+  "value_format": "compact",
+  "orientation": "h",
+  "highlight": ["Amazon Polarity"],
+  "note": "Amazon Polarity dwarfs the field —<br>~6× Yelp and ~140× IMDB.",
+  "height": 600,
+  "width": 1040,
+  "bars": [
+    { "label": "Amazon Polarity", "value": 3600000 },
+    { "label": "Yelp Polarity", "value": 560000 },
+    { "label": "AG News", "value": 120000 },
+    { "label": "SQuAD v1.1", "value": 87599 },
+    { "label": "SST-2", "value": 67349 },
+    { "label": "IMDB", "value": 25000 }
+  ]
+}

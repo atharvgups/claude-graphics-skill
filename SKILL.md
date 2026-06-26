@@ -2,20 +2,16 @@
 name: graphics
 description: >-
   Turn data into polished, presentation-ready charts in a consistent editorial
-  (a16z / Jason Saltzman) house style. Use this skill for ANY chart, graph, or
-  data graphic — bar (vertical/horizontal/grouped/stacked/100%/diverging), line,
-  area, combo (bar+line), scatter/bubble, quadrant, pie/donut, waterfall, dot
-  (lollipop/dumbbell), heatmap, treemap, sunburst, marimekko, histogram, box,
-  violin, beeswarm, ridgeline, radar, slope, bump, stream, candlestick, table,
-  KPI/big-number, gauge, bullet, choropleth map, population pyramid, pictograph,
-  sankey, and funnel. Trigger it whenever the user wants to "make/build/create a
-  chart or graph", "visualize/plot/graph this data", "turn this into a
-  graphic/infographic", "chart these numbers", "make this look good for a
-  deck/LinkedIn/report", or names any specific chart type — even from a vague ask
-  like "show this data nicely" or a pasted table/CSV. Also covers flow/where-does-
-  it-go breakdowns (sankey) and conversion funnels. Produces interactive,
-  self-contained HTML (and optional SVG/PNG) with designed defaults so output
-  looks finished without manual tweaking.
+  (a16z / Jason Saltzman) house style. Use for ANY chart, graph, or data graphic
+  — bar (incl. grouped/stacked/diverging), line, area, combo, scatter/bubble,
+  quadrant, pie/donut, waterfall, dot/lollipop, heatmap, treemap, sunburst,
+  marimekko, histogram, box/violin, beeswarm, ridgeline, radar, slope, bump,
+  stream, candlestick, table, KPI/big-number, gauge, bullet, choropleth map,
+  population pyramid, pictograph, sankey, and funnel. Trigger whenever the user
+  wants to make/build/visualize/plot/chart data, turn numbers into a
+  graphic/infographic, make something look good for a deck/LinkedIn/report, names
+  a specific chart type, or pastes a table/CSV. Produces interactive,
+  self-contained HTML (plus optional SVG/PNG) that looks finished by default.
 ---
 
 # Graphics — Presentation-Ready Data Visualizations
@@ -42,6 +38,13 @@ Default to the `editorial` theme and let the data shape pick the chart type (the
 data → type guide is below).
 
 ## How it works
+
+> **Always render through this engine. Never hand-write Plotly/matplotlib code or
+> a `<script>` chart.** The entire point of the skill is the consistent editorial
+> look, which lives in `scripts/`. Writing your own chart bypasses it and you get
+> a generic export. The only correct workflow is: write a JSON spec → run
+> `scripts/render.py`. If the Python deps aren't present, run the one-time setup
+> below first; do not fall back to ad-hoc charting.
 
 A graphic is described by a small **JSON spec**. You render it with one command:
 

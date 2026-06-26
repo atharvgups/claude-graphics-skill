@@ -48,8 +48,10 @@ def format_value(value: float, spec: dict) -> str:
     Format a number for labels using the spec's display preferences.
 
     `value_format` is a standard Python format spec (e.g. ',.0f' for
-    thousands-separated integers, ',.1f' for one decimal). `value_prefix` /
-    `value_suffix` wrap it ('$' / '%' / ' GWh'). Sensible defaults mean the
+    thousands-separated integers, ',.1f' for one decimal), OR the special value
+    'compact' / 'si' for human-scaled labels (1_200_000 -> '1.2M', 87_599 ->
+    '88K') — the right call when values span orders of magnitude. `value_prefix`
+    / `value_suffix` wrap it ('$' / '%' / ' GWh'). Sensible defaults mean the
     caller usually supplies nothing and still gets clean output.
     """
     fmt = spec.get("value_format", ",.0f")
@@ -58,11 +60,25 @@ def format_value(value: float, spec: dict) -> str:
     # Negative values with a prefix read correctly as "-$9M", not "$-9M": pull the
     # sign out in front of the prefix (no-op when there's no prefix).
     neg = isinstance(value, (int, float)) and value < 0 and prefix
-    try:
-        body = format(abs(value) if neg else value, fmt)
-    except (ValueError, TypeError):
-        body = str(value)
+    v = abs(value) if neg else value
+    if fmt in ("compact", "si") and isinstance(value, (int, float)):
+        body = _compact(v)
+    else:
+        try:
+            body = format(v, fmt)
+        except (ValueError, TypeError):
+            body = str(value)
     return f"{'-' if neg else ''}{prefix}{body}{suffix}"
+
+
+def _compact(v: float) -> str:
+    """Human-scaled number: 1_200_000 -> '1.2M', 87_599 -> '88K', 4_000 -> '4K'.
+    Keeps one decimal only when it adds information (3.6M, not 4.0M)."""
+    for div, unit in ((1e12, "T"), (1e9, "B"), (1e6, "M"), (1e3, "K")):
+        if abs(v) >= div:
+            n = v / div
+            return (f"{n:.1f}".rstrip("0").rstrip(".")) + unit
+    return f"{v:,.0f}"
 
 
 def apply_titles(fig, spec: dict, theme: dict, x_shift: float = 0) -> None:
