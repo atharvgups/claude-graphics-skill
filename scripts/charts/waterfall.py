@@ -42,7 +42,7 @@ def render(spec: dict, theme: dict) -> go.Figure:
     values = [float(s["value"]) for s in steps]
     measure = [
         "total" if s.get("type") == "total"
-        else "absolute" if s.get("type") == "absolute"
+        else "absolute" if s.get("type") in ("absolute", "start")
         else "relative"
         for s in steps
     ]
@@ -50,7 +50,10 @@ def render(spec: dict, theme: dict) -> go.Figure:
 
     inc = color_for_index(theme, 0)   # gains
     dec = color_for_index(theme, 4)   # losses
-    tot = color_for_index(theme, 1)   # totals / resets
+    # Totals anchor the bridge, so they take the theme's anchor color (deep navy
+    # in editorial) rather than another palette hue that competes with gains/
+    # losses. Falls back to the 2nd palette entry on themes without an anchor.
+    tot = theme.get("total_color") or color_for_index(theme, 1)   # totals / resets
 
     fig = go.Figure(go.Waterfall(
         x=labels, y=values, measure=measure,

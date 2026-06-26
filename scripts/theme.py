@@ -114,6 +114,9 @@ THEMES = {
         "title_color": "#1E2A44",
         "subtitle_color": "#6E6A5F",
         "source_color": "#A29D8E",
+        # Anchor color for waterfall totals / reference baselines — the deep navy
+        # reads as "this is the total", distinct from teal gains and rust losses.
+        "total_color": "#1E2A44",
         "palette": PALETTES["editorial"],
         # Broader 9-tone palette for multi-category stacks (the tight 8-tone
         # `palette` is analogous-by-design and muddies when 6+ segments stack).
@@ -162,6 +165,14 @@ THEMES = {
         "subtitle_color": "#94A3B8",
         "source_color": "#64748B",
         "palette": PALETTES["simula"],
+        # The bar palette leads indigo→cyan→violet→blue (all cool), so multi-LINE
+        # charts using it read as several near-identical blues. Lines instead get
+        # maximally-separated, vivid-on-dark hues — cyan, orange, green, pink,
+        # amber, violet, rose, sky — so adjacent series stay clearly distinct.
+        "line_palette": [
+            "#22D3EE", "#F97316", "#4ADE80", "#F472B6",
+            "#FBBF24", "#A78BFA", "#FB7185", "#38BDF8",
+        ],
         "link_opacity": 0.58,
         "node_pad": 32,
         "node_thickness": 26,
