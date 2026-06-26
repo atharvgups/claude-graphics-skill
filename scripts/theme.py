@@ -11,6 +11,18 @@ chart type the same way.
 Add a new look by adding one entry to THEMES. Keep palettes curated and high
 contrast against the background — auto-generated rainbows are the #1 reason
 data graphics look amateurish.
+
+Font portability
+----------------
+PNG/SVG export goes through kaleido (headless Chrome), so each `font_family`
+must resolve on whatever machine renders the chart, not just the author's. The
+house fonts (Georgia, Inter, Plus Jakarta Sans) ship on macOS/Windows but are
+absent on most Linux/CI boxes, so every stack ends with metric-compatible
+fallbacks that DO ship widely — Liberation Serif/Sans (Times/Arial metrics) and
+DejaVu Serif/Sans (bundled with matplotlib and most Linux distros) — before the
+generic serif/sans-serif. This keeps spacing and headline wrapping stable across
+platforms even when the preferred face is missing. For the exact editorial look,
+have Georgia installed where you render.
 """
 
 from __future__ import annotations
@@ -61,7 +73,7 @@ THEMES = {
     "midnight": {
         "paper_bg": "#0B1020",
         "plot_bg": "#0B1020",
-        "font_family": "Inter, 'Helvetica Neue', Arial, sans-serif",
+        "font_family": "Inter, 'Helvetica Neue', Arial, 'Liberation Sans', 'DejaVu Sans', sans-serif",
         "font_color": "#E6EAF2",
         "title_color": "#FFFFFF",
         "subtitle_color": "#9BA8C2",
@@ -87,7 +99,7 @@ THEMES = {
     "editorial": {
         "paper_bg": "#ECE8DD",
         "plot_bg": "#ECE8DD",
-        "font_family": "Georgia, 'Times New Roman', serif",
+        "font_family": "Georgia, 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif",
         "font_color": "#3A3A36",
         "title_color": "#1E2A44",
         "subtitle_color": "#6E6A5F",
@@ -134,7 +146,7 @@ THEMES = {
     "simula": {
         "paper_bg": "#0F172A",
         "plot_bg": "#0F172A",
-        "font_family": "'Plus Jakarta Sans', 'Inter', 'Helvetica Neue', Arial, sans-serif",
+        "font_family": "'Plus Jakarta Sans', 'Inter', 'Helvetica Neue', Arial, 'Liberation Sans', 'DejaVu Sans', sans-serif",
         "font_color": "#E2E8F0",
         "title_color": "#FFFFFF",
         "subtitle_color": "#94A3B8",
@@ -157,7 +169,7 @@ THEMES = {
     "brand": {
         "paper_bg": "#FFFFFF",
         "plot_bg": "#FFFFFF",
-        "font_family": "Inter, 'Helvetica Neue', Arial, sans-serif",
+        "font_family": "Inter, 'Helvetica Neue', Arial, 'Liberation Sans', 'DejaVu Sans', sans-serif",
         "font_color": "#1F2937",
         "title_color": "#111827",
         "subtitle_color": "#6B7280",
