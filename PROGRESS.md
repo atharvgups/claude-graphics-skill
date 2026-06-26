@@ -103,6 +103,15 @@ separation + direct labels disambiguate).
   brand gradient untouched, so ≤4-series charts are byte-identical.
 - midnight/brand: no adjacent fails (only non-adjacent warnings). Left as-is.
 
+## Critique pass (render → Read PNG → fix)
+Re-read PNGs of the reference standard + representative types. tool_ranking_bar,
+manufacturing_construction (diverging stack), inference_combo all hold at 5.
+Caught one latent defect on multi-line: end-of-line value/name labels were placed
+at the exact data-y with no separation, so series finishing at close values
+(valuation_line: 38% vs 30%) stacked and nearly overlapped. Fixed with a shared
+`_deconflict()` greedy vertical nudge in line.py — cascades to every multi-line
+chart. Verified by re-Read: labels now clearly separated.
+
 ## Log
 - a59a7fa baseline import (all current work).
 - 3d23d83 a16z calibration notes + PROGRESS.
