@@ -57,9 +57,14 @@ PALETTES = {
     # plus the accent colors used across simula.ad. Indigo leads (the primary
     # brand color), followed by the bright logo cyan and violet, then a spread
     # of distinct supporting hues that stay vivid on a dark canvas.
+    # The lead four (the brand gradient) are fixed; the tail is ordered so every
+    # ADJACENT pair stays distinguishable under deuteranopia/protanopia (teal and
+    # magenta collapsed to ΔE 6 when adjacent — magenta now sits at index 7, not
+    # next to the teal at index 4). Same color set; only ≥5-series charts shift.
+    # Verified by scripts/qa_colorblind.py (adjacent min ΔE ~16 under all CVD).
     "simula": [
         "#4F46E5", "#22D3EE", "#7C3AED", "#3B82F6",
-        "#14B8A6", "#EC4899", "#F97316", "#22C55E",
+        "#14B8A6", "#F97316", "#22C55E", "#EC4899",
         "#A5B4FC", "#FBBF24",
     ],
 }

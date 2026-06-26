@@ -88,6 +88,21 @@ small_multiples, pie (needed automargin=False), radar. All headlines now sit at
 the ~28px canvas edge (verified by pixel measurement, title_x≈30). Charts already
 at the edge: treemap, sunburst, table, sankey, funnel, dot, waterfall, indicators.
 
+## Colorblind safety (CVD audit — `scripts/qa_colorblind.py`)
+Simulated protanopia/deuteranopia/tritanopia (Machado 2009, severity 1.0) on
+every theme's `palette`/`stack_palette`/`line_palette`, measuring CIE Lab ΔE.
+Gate = ADJACENT pairs (the ones that touch in a stack / are drawn in order) must
+clear ΔE 12 under all three CVD types; non-adjacent pairs are warn-only (spatial
+separation + direct labels disambiguate).
+- editorial.stack_palette (the requested target): PASS — adjacent min ΔE ≥ 19.6
+  under all CVD. No collisions → no change, as the brief anticipated.
+- editorial.palette / line_palette: PASS (adjacent min ≥ 12.4 / 17.1).
+- The sweep CAUGHT a real adjacent fail in simula.palette: teal #14B8A6 and
+  magenta #EC4899 collapsed to ΔE 6 under deuteranopia when adjacent. Fixed by a
+  same-color-set tail reorder (magenta → index 7); adjacent min now ~16. Lead
+  brand gradient untouched, so ≤4-series charts are byte-identical.
+- midnight/brand: no adjacent fails (only non-adjacent warnings). Left as-is.
+
 ## Log
 - a59a7fa baseline import (all current work).
 - 3d23d83 a16z calibration notes + PROGRESS.
