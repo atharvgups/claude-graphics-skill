@@ -26,9 +26,16 @@ import sys
 # Make sibling modules importable whether run as `python render.py` or `-m`.
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-import charts  # noqa: F401,E402  -> registers all chart types on import
-from charts.base import get_renderer  # noqa: E402
-from theme import get_theme  # noqa: E402
+# Heavy imports (plotly, etc.) are wrapped so `--selfcheck` can report a missing
+# dependency with a friendly fix instead of crashing on an import traceback —
+# that absent-deps case is exactly when a caller most needs the diagnosis.
+try:
+    import charts  # noqa: F401  -> registers all chart types on import
+    from charts.base import get_renderer
+    from theme import get_theme
+    _IMPORT_ERROR = None
+except Exception as _exc:  # pragma: no cover - depends on env
+    _IMPORT_ERROR = _exc
 
 
 def load_spec(path: str) -> dict:
@@ -60,9 +67,61 @@ def write_output(fig, out_path: str, fmt: str, png_scale: int) -> None:
         )
 
 
+def selfcheck() -> int:
+    """Prove the engine is live before relying on it: registry populated, theme
+    loads, and a real chart renders to HTML in-memory. Exits 0 only if rendering
+    actually works — so a caller can gate on it instead of hand-rolling a chart.
+    """
+    if _IMPORT_ERROR is not None:
+        print(f"✗ graphics engine NOT live: {_IMPORT_ERROR}")
+        print("  Fix: from the skill dir run "
+              "`python3 -m venv .venv && ./.venv/bin/pip install -r requirements.txt`,"
+              " then call render.py with ./.venv/bin/python.")
+        return 1
+
+    from charts.base import _REGISTRY  # noqa: PLC0415
+
+    try:
+        n = len(_REGISTRY)
+        if n == 0:
+            raise RuntimeError("no chart types registered")
+        theme = get_theme("editorial")
+        spec = {"chart_type": "bar", "orientation": "h", "title": "selfcheck",
+                "bars": [{"label": "A", "value": 3}, {"label": "B", "value": 7}]}
+        fig = get_renderer("bar")(spec, theme)
+        html = fig.to_html(include_plotlyjs=False, full_html=False)
+        if "<div" not in html:
+            raise RuntimeError("renderer produced no HTML")
+    except Exception as exc:  # surface the real failure, don't mask it
+        print(f"✗ graphics engine NOT live: {exc}")
+        print("  Fix: from the skill dir run "
+              "`python3 -m venv .venv && ./.venv/bin/pip install -r requirements.txt`,"
+              " then call render.py with ./.venv/bin/python.")
+        return 1
+
+    try:
+        import kaleido  # noqa: F401,PLC0415
+        png = "available"
+    except Exception:
+        png = "MISSING (HTML still works; `pip install kaleido` for PNG/SVG)"
+
+    print("✓ graphics engine is LIVE — render via scripts/render.py, do NOT "
+          "hand-write chart code.")
+    print(f"  chart types registered: {n}")
+    print(f"  HTML export: working   ·   PNG/SVG (kaleido): {png}")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Render a data-graphic spec.")
-    parser.add_argument("spec", help="Path to the JSON spec file")
+    parser.add_argument(
+        "--selfcheck",
+        action="store_true",
+        help="Verify the engine is live (registry + a real render) and exit. "
+             "Run this FIRST if unsure the skill works; if it passes, always "
+             "render through this script rather than writing chart code.",
+    )
+    parser.add_argument("spec", nargs="?", help="Path to the JSON spec file")
     parser.add_argument("-o", "--out", help="Output path (extension sets format if -f omitted)")
     parser.add_argument(
         "-f",
@@ -73,6 +132,18 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("-t", "--theme", help="Override the spec's theme (midnight|editorial|brand)")
     parser.add_argument("--png-scale", type=int, default=2, help="Scale factor for PNG export (default 2 = retina)")
     args = parser.parse_args(argv)
+
+    if args.selfcheck:
+        return selfcheck()
+    if not args.spec:
+        parser.error("the following arguments are required: spec "
+                     "(or pass --selfcheck)")
+    if _IMPORT_ERROR is not None:
+        raise SystemExit(
+            f"graphics engine can't load ({_IMPORT_ERROR}). Run "
+            "`python3 -m venv .venv && ./.venv/bin/pip install -r requirements.txt`"
+            " first, then render with ./.venv/bin/python. (Run --selfcheck to verify.)"
+        )
 
     spec = load_spec(args.spec)
 

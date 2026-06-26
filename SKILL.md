@@ -43,8 +43,10 @@ data → type guide is below).
 > a `<script>` chart.** The entire point of the skill is the consistent editorial
 > look, which lives in `scripts/`. Writing your own chart bypasses it and you get
 > a generic export. The only correct workflow is: write a JSON spec → run
-> `scripts/render.py`. If the Python deps aren't present, run the one-time setup
-> below first; do not fall back to ad-hoc charting.
+> `scripts/render.py`. If unsure the engine works, run the self-check first —
+> `python scripts/render.py --selfcheck` — which confirms the renderer is live
+> (and tells you the one-time setup command if deps are missing). Do that setup;
+> do not fall back to ad-hoc charting.
 
 A graphic is described by a small **JSON spec**. You render it with one command:
 
