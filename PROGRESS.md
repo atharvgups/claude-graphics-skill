@@ -102,6 +102,13 @@ separation + direct labels disambiguate).
   same-color-set tail reorder (magenta → index 7); adjacent min now ~16. Lead
   brand gradient untouched, so ≤4-series charts are byte-identical.
 - midnight/brand: no adjacent fails (only non-adjacent warnings). Left as-is.
+- Follow-up: measured NORMAL-vision near-duplicates too. midnight is clean
+  (closest pair ΔE 31). simula's only close pair (indigo|violet ΔE 14) is the
+  intentional logo gradient — left as-is. brand had a real near-duplicate:
+  #6366F1 (idx 8) sat ΔE ~14-18 from both the indigo (#0) and violet (#5) even
+  to normal vision, so 6+-series charts wasted a slot on a look-alike. Swapped
+  it for a true blue #3B82F6 (fills the one hue gap, equally vivid); closest
+  normal pair is now ΔE 17.9 and the CVD gate still passes.
 
 ## Critique pass (render → Read PNG → fix)
 Re-read PNGs of the reference standard + representative types. tool_ranking_bar,

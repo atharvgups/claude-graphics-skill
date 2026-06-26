@@ -47,11 +47,16 @@ PALETTES = {
         "#3E7C73", "#466089", "#7C9A6B", "#C98A3C",
         "#A8553A", "#5E8F86", "#8A7B57", "#6E6A8C",
     ],
-    # Confident tech-brand palette: indigo-led, clean, modern.
+    # Confident tech-brand palette: indigo-led, clean, modern. Index 8 is a true
+    # blue (#3B82F6), not a second indigo — the old #6366F1 was a near-duplicate
+    # of both the indigo (#0) and the violet (#5) (ΔE ~14-18 even to normal
+    # vision), so a 6+-series chart wasted a slot on a look-alike. The blue fills
+    # the palette's one hue gap and stays just as vivid. Verified by
+    # scripts/qa_colorblind.py (adjacent pairs still clear the CVD gate).
     "brand": [
         "#4338CA", "#0EA5E9", "#10B981", "#F59E0B",
         "#EC4899", "#8B5CF6", "#14B8A6", "#EF4444",
-        "#6366F1", "#84CC16",
+        "#3B82F6", "#84CC16",
     ],
     # Simula brand palette, derived from the logo's cyan→blue→indigo gradient
     # plus the accent colors used across simula.ad. Indigo leads (the primary
